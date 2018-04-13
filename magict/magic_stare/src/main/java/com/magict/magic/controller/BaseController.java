@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 基础控制层
- * User: lwh
- * Date: 2017/8/11 10:17
+ * @author ZP
+ * @// TODO: 2018/4/13  
  */
 public class BaseController {
 	protected transient final Logger logger = LoggerFactory.getLogger(getClass());
