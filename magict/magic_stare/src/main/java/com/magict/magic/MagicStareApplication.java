@@ -6,8 +6,6 @@ import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
 @PropertySource("classpath:application-stare.properties")
-//@ServletComponentScan
-//@Import(MagicCoreApplication.class)
 public class MagicStareApplication {
 
 	public static void main(String[] args) {
