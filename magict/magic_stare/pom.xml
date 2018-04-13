@@ -3,69 +3,32 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.magict.magic</groupId>
 	<artifactId>magic_stare</artifactId>
-	<version>1.0.0</version>
-	<packaging>jar</packaging>
-
-	<name>magic_stare</name>
-	<description>Demo project for Spring Boot</description>
 
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.1.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<groupId>com.magict.parent</groupId>
+		<artifactId>magic_parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../magic_parent/pom.xml</relativePath><!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<start-class>com.magict.magic.MagicStareApplication</start-class>
 	</properties>
 
 	<dependencies>
 
 		<dependency>
-			<groupId>com.magict.magic</groupId>
+			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>magic_core</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-freemarker</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<version>1.5.6.RELEASE</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${project.parent.version}</version>
 		</dependency>
 
 
-
-
-
-
-
-
-
-	</dependencies>
+    </dependencies>
 
 	<build>
 		<plugins>
@@ -73,8 +36,17 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<!--
+                         为了创建可执行的jar，我们需要将 spring-boot-maven-plugin 添加
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-compiler-plugin</artifactId>
+                            <configuration>
+                                <source>1.8</source>
+                                <target>1.8</target>
+                            </configuration>
+                        </plugin>-->
 		</plugins>
 	</build>
-
 
 </project>

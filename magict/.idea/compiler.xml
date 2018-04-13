@@ -12,7 +12,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="magic_core" target="1.8" />
-      <module name="magic_parent" target="1.7" />
+      <module name="magic_parent" target="1.8" />
       <module name="magic_stare" target="1.8" />
     </bytecodeTargetLevel>
   </component>
