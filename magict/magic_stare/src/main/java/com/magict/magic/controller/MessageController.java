@@ -1,5 +1,6 @@
 package com.magict.magic.controller;
 
+import com.magict.magic.entity.WxUser;
 import com.magict.magic.service.ColNewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/message")
 public class MessageController extends BaseController {
-
+//	@Autowired
+//	WxUserService wxUserService;
 	@Autowired
 	ColNewsService colNewsService;
 //    @Autowired
@@ -40,9 +42,15 @@ public class MessageController extends BaseController {
 			{"http://news.baidu.com/n?cmd=4&class=hg_guonei&cls=hg_guonei","GBK"}
 			};
 
+	/**
+	 * @param request
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/list")
 	public String findTodayMessage(HttpServletRequest request, Model model){
 		logger.debug("###########/message/list############");
+//		WxUser wxUser = wxUserService.findAll();
 		cnt++;
 		/*Object cnt =  redisTemplate.opsForValue().get("cnt");
 		Integer cnt0 = 1;
