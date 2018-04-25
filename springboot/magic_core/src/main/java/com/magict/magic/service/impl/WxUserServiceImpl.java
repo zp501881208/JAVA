@@ -29,13 +29,15 @@ public class WxUserServiceImpl extends BaseServiceImpl<WxUser> implements WxUser
     WxUserMapper wxUserMapper;
 
     @Override
+    public WxUser selectByPrimaryKey(Integer id){
+        return wxUserMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public WxUser findByOpenid(String openid) {
-        List<WxUser> wxUserList = wxUserMapper.selectByExample(new Example.Builder(WxUser.class)
-                .andWhere(WeekendSqls.<WxUser>custom().andEqualTo(WxUser::getOpenid,openid))
+        WxUser wxUser = wxUserMapper.selectOneByExample(new Example.Builder(WxUser.class)
+                .andWhere(WeekendSqls.<WxUser>custom().andEqualTo(WxUser::getOpenid, openid))
                 .build());
-        if(!wxUserList.isEmpty()){
-            return wxUserList.get(0);
-        }
-        return null;
+        return wxUser;
     }
 }

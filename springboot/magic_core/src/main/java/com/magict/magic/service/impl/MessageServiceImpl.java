@@ -15,4 +15,9 @@ import org.springframework.stereotype.Service;
 public class MessageServiceImpl extends BaseServiceImpl<Message> implements MessageService {
     @Autowired
     private MessageMapper messageMapper;
+
+    @Override
+    public Message selectByPrimaryKey(Integer id){
+        return messageMapper.selectByPrimaryKey(id);
+    }
 }

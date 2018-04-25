@@ -12,6 +12,12 @@ import org.slf4j.LoggerFactory;
  .where(WeekendSqls.<Country>custom().andLike(Country::getCountryname, "%a%")
  .andGreaterThan(Country::getCountrycode, "123"))
  .build());
+ *         List<WxUser> wxUserList = wxUserMapper.selectByExample(new Example.Builder(WxUser.class)
+ .andWhere(WeekendSqls.<WxUser>custom().andEqualTo(WxUser::getOpenid,openid))
+ .build());
+ WeekendSqls<WxUser> wxUserWeekendSqls = WeekendSqls.<WxUser>custom().andLike(WxUser::getNickname, "%test%");
+ Example example = Example.builder(WxUser.class).andWhere(wxUserWeekendSqls).build();
+ List<WxUser> wxUserList = wxUserMapper.selectByExample(example);
  * @param <T>
  */
 public class BaseServiceImpl<T extends BaseEntity> implements BaseService {
