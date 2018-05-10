@@ -4,6 +4,10 @@ import com.magict.magic.entity.BaseEntity;
 import com.magict.magic.service.BaseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import tk.mybatis.mapper.common.Mapper;
+
+import java.io.Serializable;
 
 /**
  * Mapper使用范例
@@ -20,9 +24,25 @@ import org.slf4j.LoggerFactory;
  List<WxUser> wxUserList = wxUserMapper.selectByExample(example);
  * @param <T>
  */
-public class BaseServiceImpl<T extends BaseEntity> implements BaseService {
+public class BaseServiceImpl<T extends Serializable> implements BaseService<T> {
     protected transient final Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Autowired
+    protected Mapper<T> mapper;
 
+    @Override
+    public boolean insertSelective(T entity) {
+        return 1==mapper.insertSelective(entity);
+    }
+
+    @Override
+    public T selectByPrimaryKey(Serializable id) {
+        return mapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public boolean updateByPrimaryKeySelective(T entity) {
+        return false;
+    }
 
 }

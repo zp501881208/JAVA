@@ -2,5 +2,27 @@ package com.magict.magic.service;
 
 import com.magict.magic.entity.BaseEntity;
 
-public interface BaseService {
+import java.io.Serializable;
+
+public interface BaseService<T extends Serializable> {
+    /**
+     * 添加
+     * @param entity 添加对象
+     * @return
+     */
+    boolean insertSelective(T entity);
+
+    /**
+     * 根据id查询
+     * @param id
+     * @return
+     */
+    T selectByPrimaryKey(Serializable id);
+
+    /**
+     * 根据id更新
+     * @param entity 更新对象
+     * @return
+     */
+    boolean updateByPrimaryKeySelective(T entity);
 }

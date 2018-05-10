@@ -16,8 +16,4 @@ public class MessageServiceImpl extends BaseServiceImpl<Message> implements Mess
     @Autowired
     private MessageMapper messageMapper;
 
-    @Override
-    public Message selectByPrimaryKey(Integer id){
-        return messageMapper.selectByPrimaryKey(id);
-    }
 }

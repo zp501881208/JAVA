@@ -7,7 +7,6 @@ import com.magict.magic.entity.WxUser;
 * @author zp
 * @date 2018-04-14 22:47:35
 */
-public interface WxUserService extends BaseService{
-    WxUser selectByPrimaryKey(Integer id);
+public interface WxUserService extends BaseService<WxUser>{
     WxUser findByOpenid(String openid);
 }

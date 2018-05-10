@@ -2,6 +2,8 @@ package com.magict.magic.service.impl;
 
 
 import com.magict.magic.service.ColNewsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -20,9 +22,9 @@ import java.util.regex.Pattern;
  * @return  
 */
 @Service
-public class ColNewsServiceImpl extends BaseServiceImpl implements ColNewsService {
+public class ColNewsServiceImpl implements ColNewsService {
 
-
+	protected transient final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Override
 	public List<String> colNews(String[][] urls) {
