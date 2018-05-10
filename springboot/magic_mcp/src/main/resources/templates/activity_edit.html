@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8"/>
+	<title>编辑活动</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+	<!-- basic styles -->
+
+	<link href="assets/css/bootstrap.min.css" th:href="@{/assets/css/bootstrap.min.css}" rel="stylesheet"/>
+	<link rel="stylesheet" href="assets/css/font-awesome.min.css" th:href="@{/assets/css/font-awesome.min.css}"/>
+	<!--[if IE 7]>
+	<link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css"/>
+	<![endif]-->
+	<!-- page specific plugin styles -->
+	<!-- fonts -->
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300"/>
+	<!-- ace styles -->
+	<link rel="stylesheet" href="assets/css/ace.min.css" th:href="@{/assets/css/ace.min.css}"/>
+	<link rel="stylesheet" href="assets/css/ace-rtl.min.css" th:href="@{/assets/css/ace-rtl.min.css}"/>
+	<link rel="stylesheet" href="assets/css/ace-skins.min.css" th:href="@{/assets/css/ace-skins.min.css}"/>
+	<!--[if lte IE 8]>
+	<link rel="stylesheet" href="assets/css/ace-ie.min.css" th:href="@{/assets/css/ace-ie.min.css}"/>
+	<![endif]-->
+	<!-- inline styles related to this page -->
+	<!-- ace settings handler -->
+	<script src="assets/js/ace-extra.min.js" th:src="@{/assets/js/ace-extra.min.js}"></script>
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="assets/js/html5shiv.js" th:src="@{/assets/js/html5shiv.js}"></script>
+	<script src="assets/js/respond.min.js" th:src="@{/assets/js/respond.min.js}"></script>
+	<![endif]-->
+
+	<!-- basic scripts -->
+
+	<script src="assets/js/jquery-2.0.3.min.js" th:src="@{/assets/js/jquery-2.0.3.min.js}"></script>
+
+	<!-- <![endif]-->
+
+	<script type="text/javascript">
+        if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+	</script>
+	<script src="assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
+	<script src="assets/js/typeahead-bs2.min.js" th:src="@{/assets/js/typeahead-bs2.min.js}"></script>
+	<script src="assets/js/common.js" th:src="@{/assets/js/common.js}"></script>
+	<!-- page specific plugin scripts -->
+	<!--[if lte IE 8]>
+	<script src="assets/js/excanvas.min.js" th:src="@{/assets/js/excanvas.min.js}"></script>
+	<![endif]-->
+
+	<script src="assets/js/jquery-ui-1.10.3.custom.min.js"
+			th:src="@{/assets/js/jquery-ui-1.10.3.custom.min.js}"></script>
+	<script src="assets/js/jquery.ui.touch-punch.min.js" th:src="@{/assets/js/jquery.ui.touch-punch.min.js}"></script>
+	<script src="assets/js/jquery.slimscroll.min.js" th:src="@{/assets/js/jquery.slimscroll.min.js}"></script>
+	<script src="assets/js/jquery.easy-pie-chart.min.js" th:src="@{/assets/js/jquery.easy-pie-chart.min.js}"></script>
+	<script src="assets/js/jquery.sparkline.min.js" th:src="@{/assets/js/jquery.sparkline.min.js}"></script>
+	<script src="assets/js/flot/jquery.flot.min.js" th:src="@{/assets/js/flot/jquery.flot.min.js}"></script>
+	<script src="assets/js/flot/jquery.flot.pie.min.js" th:src="@{/assets/js/flot/jquery.flot.pie.min.js}"></script>
+	<script src="assets/js/flot/jquery.flot.resize.min.js"
+			th:src="@{/assets/js/flot/jquery.flot.resize.min.js}"></script>
+
+	<!-- ace scripts -->
+
+	<script src="assets/js/ace-elements.min.js" th:src="@{/assets/js/ace-elements.min.js}"></script>
+	<script src="assets/js/ace.min.js" th:src="@{/assets/js/ace.min.js}"></script>
+
+	<!--日期-->
+	<script type="text/javascript" src="assets/js/My97DatePicker/WdatePicker.js"
+			th:src="@{/assets/js/My97DatePicker/WdatePicker.js}"></script>
+	<!--二维码-->
+	<script src="assets/js/qrcode.min.js" th:src="@{/assets/js/qrcode.min.js}"></script>
+	<style type="text/css">
+		*{ padding:0; margin:0; }
+		.wait-bg{ width: 100%; height: 100%; position: fixed; top:0; left: 0;background: transparent; display: none}
+		.wait-box{width: 300px; height: 80px; line-height: 80px; position: absolute; top:50%; left: 50%; margin-top: -40px; margin-left: -150px; background: rgba(255,0,0,.4); padding:0 30px; box-sizing: border-box; box-shadow: 1px 1px 5px rgba(255,0,0,0.5); color: #fff; text-align: center;}
+		.wait-box p{ background: url(/assets/images/base/wait.gif) no-repeat 30px center;background-size: 25px; padding-left: 30px; }
+	</style>
+
+	<style type="text/css">
+		.inline-btn {
+			padding: 3px 0 0 0 !important;
+		}
+
+		.hei34 {
+			height: 34px;
+		}
+
+		.input-media {
+			background: #f5f5f5;
+			padding: 15px;
+		}
+
+		.input-media ol li {
+			display: block;
+		}
+
+		.pointer {
+			cursor: pointer;
+		}
+
+		.trashbtn {
+			position: absolute;
+			right: -30px;
+			top: 0;
+			cursor: pointer;
+		}
+
+		.pad4_12 {
+			padding: 4px 12px;
+		}
+
+		.okewm {
+			width: 200px;
+			height: 200px;
+		}
+
+		.upimg2 {
+			width: 120px;
+			height: 180px;
+			position: relative;
+		}
+
+		.upimg2 label {
+			width: 120px;
+			height: 180px;
+			border: 1px solid #e0e4e8;
+			border-radius: 10px;
+			overflow: hidden;
+			cursor: pointer;
+			float: left;
+			background: #fff;
+		}
+
+		.upimg2 input[type=file] {
+			opacity: 0;
+			width: 120px;
+			height: 180px;
+			display: none;
+		}
+
+		.upimg2 label img {
+			width: 120px;
+			height: 180px;
+		}
+		.upshare {
+			width: 180px;
+			height: 180px;
+			position: relative;
+		}
+
+		.upshare label {
+			width: 180px;
+			height: 180px;
+			border: 1px solid #e0e4e8;
+			overflow: hidden;
+			cursor: pointer;
+			float: left;
+			background: #fff;
+		}
+
+		.upshare input[type=file] {
+			opacity: 0;
+			width: 180px;
+			height: 180px;
+			display: none;
+		}
+
+		.upshare label img {
+			width: 180px;
+			height: 180px;
+		}
+		.upshare2 {
+			width: 120px;
+			height: 180px;
+			position: relative;
+		}
+
+		.upshare2 label {
+			width: 120px;
+			height: 180px;
+			border: 1px solid #e0e4e8;
+			border-radius: 10px;
+			overflow: hidden;
+			cursor: pointer;
+			float: left;
+			background: #fff;
+		}
+
+		.upshare2 input[type=file] {
+			opacity: 0;
+			width: 120px;
+			height: 180px;
+			display: none;
+		}
+
+		.upshare2 label img {
+			width: 120px;
+			height: 180px;
+		}
+		.text-left-i{ text-align: left !important; color: red; }
+	</style>
+</head>
+
+<body>
+<div class="navbar navbar-default" id="navbar">
+	<script type="text/javascript">
+        try {
+            ace.settings.check('navbar', 'fixed')
+        } catch (e) {
+        }
+	</script>
+
+	<div class="navbar-container" id="navbar-container">
+		<div class="navbar-header pull-left">
+			<a href="#">
+				<small>
+					<img src="assets/images/base/logo.png" th:src="@{/assets/images/base/logo.png}"
+						 style="height: 45px; padding: 5px 0">
+				</small>
+			</a><!-- /.brand -->
+		</div><!-- /.navbar-header -->
+
+		<div class="navbar-header pull-right" role="navigation">
+			<ul class="nav ace-nav">
+				<!--<li class="light-blue">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <i class="icon-bell-alt icon-animated-bell"></i>
+                        <span class="badge badge-important">8</span>
+                    </a>
+
+                    <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+                        <li class="dropdown-header">
+                            <i class="icon-warning-sign"></i>
+                            8 条未读信息
+                        </li>
+
+                        <li>
+                            <a href="notice.html">
+                                <div class="clearfix">
+                                            <span class="pull-left">
+                                                <i class="btn btn-xs no-hover btn-pink icon-comment"></i>
+                                                通知列表
+                                            </span>
+                                    <span class="pull-right badge badge-info">+8</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>-->
+				<li class="light-blue">
+					<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+						<!--<img class="nav-user-photo" src="assets/avatars/user.jpg" th:src="@{/assets/avatars/user.jpg}"-->
+							 <!--alt="瘤董事长"/>-->
+						<span class="user-info" style="line-height:30px;">
+							<small th:text="'Welcome,'+${session.admin.adminName}"></small>
+						</span>
+
+						<i class="icon-caret-down"></i>
+					</a>
+
+					<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+						<!--<li>
+							<a href="#">
+								<i class="icon-user"></i>
+								修改密码
+							</a>
+						</li>-->
+
+						<li class="divider"></li>
+
+						<li>
+							<a href="#" th:href="@{/logout}">
+								<i class="icon-off"></i>
+								退出
+							</a>
+						</li>
+					</ul>
+				</li>
+			</ul><!-- /.ace-nav -->
+		</div><!-- /.navbar-header -->
+	</div><!-- /.container -->
+</div>
+
+<div class="main-container" id="main-container">
+	<script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+	</script>
+
+	<div class="main-container-inner">
+		<a class="menu-toggler" id="menu-toggler" href="#">
+			<span class="menu-text"></span>
+		</a>
+
+		<div class="sidebar" id="sidebar">
+			<script type="text/javascript">
+                try {
+                    ace.settings.check('sidebar', 'fixed')
+                } catch (e) {
+                }
+			</script>
+
+			<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+				<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+					<button class="btn btn-success">
+						微
+					</button>
+
+					<button class="btn btn-info">
+						智
+					</button>
+
+					<button class="btn btn-warning">
+						传
+					</button>
+
+					<button class="btn btn-danger">
+						媒
+					</button>
+				</div>
+
+				<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+					<span class="btn btn-success"></span>
+
+					<span class="btn btn-info"></span>
+
+					<span class="btn btn-warning"></span>
+
+					<span class="btn btn-danger"></span>
+				</div>
+			</div><!-- #sidebar-shortcuts -->
+
+			<ul class="nav nav-list">
+				<li>
+					<a href="index.html" th:href="@{/cms/home/index}">
+						<i class="icon-dashboard"></i>
+						<span class="menu-text"> 首页 </span>
+					</a>
+				</li>
+
+				<li>
+					<a href="activity.html" th:href="@{/cms/activity/list}">
+						<i class="icon-group"></i>
+						<span class="menu-text"> 活动管理 </span>
+					</a>
+				</li>
+
+				<li>
+					<a href="notice.html" th:href="@{/cms/access/list}">
+						<i class="icon-comment"></i>
+						<span class="menu-text"> 访问管理 </span>
+					</a>
+				</li>
+
+				<li>
+					<a href="statistic.html" th:href="@{/cms/accessStatistics/list}">
+						<i class="icon-signal"></i>
+						<span class="menu-text"> 数据统计 </span>
+					</a>
+				</li>
+			</ul><!-- /.nav-list -->
+
+			<div class="sidebar-collapse" id="sidebar-collapse">
+				<i class="icon-double-angle-left" data-icon1="icon-double-angle-left"
+				   data-icon2="icon-double-angle-right"></i>
+			</div>
+
+			<script type="text/javascript">
+                try {
+                    ace.settings.check('sidebar', 'collapsed')
+                } catch (e) {
+                }
+			</script>
+		</div>
+
+		<div class="main-content">
+			<div class="breadcrumbs" id="breadcrumbs">
+				<script type="text/javascript">
+                    try {
+                        ace.settings.check('breadcrumbs', 'fixed')
+                    } catch (e) {
+                    }
+				</script>
+
+				<ul class="breadcrumb">
+					<li>
+						<i class="icon-home home-icon"></i>
+						<a th:href="@{/cms/activity/list}">活动管理</a>
+					</li>
+				</ul><!-- .breadcrumb -->
+			</div>
+
+			<div class="page-content">
+				<div class="row">
+					<div class="col-xs-12">
+						<!-- PAGE CONTENT BEGINS -->
+
+						<div class="page-content">
+							<div class="row">
+								<form class="form-horizontal" role="form" id="myForm" th:action="@{/cms/activity/edit}"
+									  method="post" enctype="multipart/form-data">
+									<input type="hidden" th:value="${activity.activityId}" name="activityId" id="activityId"/>
+									<div class="col-md-10">
+										<div class="form-group col-md-6">
+											<label class="col-md-3 control-label no-padding-right">活动名称</label>
+											<div class="col-md-9">
+												<input type="text" id="activityName" name="activityName" th:value="${activity.activityName}"
+													   placeholder="活动名称" class="form-control">
+											</div>
+										</div>
+										<div class="form-group col-md-6 hei34">
+											<label class="col-md-3 control-label no-padding-right">活动状态</label>
+											<div class="col-md-9 form-inline">
+												<div class="radio inline-btn">
+													<label th:if="${activity.activityStatus==1}">
+														<input name="activityStatus" type="radio" class="ace" value="1" checked>
+														<span class="lbl"> 开启</span>
+													</label>
+													<label th:if="${activity.activityStatus!=1}">
+														<input name="activityStatus" type="radio" class="ace" value="1">
+														<span class="lbl"> 开启</span>
+													</label>
+												</div>
+												<div class="radio inline-btn">
+													<label th:if="${activity.activityStatus==0}">
+														<input name="activityStatus" type="radio" class="ace" value="0" checked>
+														<span class="lbl"> 关闭</span>
+													</label>
+													<label th:if="${activity.activityStatus!=0}">
+														<input name="activityStatus" type="radio" class="ace" value="0">
+														<span class="lbl"> 关闭</span>
+													</label>
+												</div>
+											</div>
+										</div>
+
+										<!--<div class="form-group col-md-6">
+                                            <label class="col-md-3 control-label no-padding-right">开始时间</label>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="开始时间" id="startDate" class="form-control Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'endDate\')}'})">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="col-md-3 control-label no-padding-right">结束时间</label>
+                                            <div class="col-md-9">
+                                                <input type="text" placeholder="结束时间" id="endDate" class="form-control Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'startDate\')}',maxDate:new Date()})">
+                                            </div>
+                                        </div>-->
+
+										<div class="form-group col-md-6">
+											<label class="col-md-3 control-label no-padding-right">添加图片视频</label>
+											<div class="col-md-9">
+												<a class="control-label pointer" onclick="addImgBtn()">添加图片</a>
+												<span class="control-label text-left-i">高度*宽度，建议:750*1334</span>
+											</div>
+											<div class="col-md-9 col-md-offset-3">
+												<a class="control-label pointer" onclick="addMediaBtn()">添加视频</a>
+												<span class="control-label text-left-i">视频比例，建议:竖屏540*960 横屏960*540</span>
+											</div>
+											<div class="col-md-9 col-md-offset-3">
+												<span class="control-label text-left-i">(第一个元素必须是图片！)</span>
+											</div>
+										</div>
+										<div class="form-group col-md-12 add-media">
+											<div class="input-media clearfix">
+												<div class="form-group col-md-6">
+													<ol>
+														<!-- 整个li循环，按页面顺序来循环，istop为数据ID，以istop排序 下面注释掉的li是给你做例子对比的，看完了自行删掉 -->
+														<li class="form-group" th:each="resource,stat:${list}">
+															<input type="hidden" th:value="${resource.activityResourceId}" name="activityResourceIds"/>
+															<input type="hidden" th:value="${resource.resourceType}" name="resourceTypes"/>
+															<label class="col-md-3 control-label no-padding-right" th:if="${resource.resourceType==2}">图片</label>
+															<div class="col-md-9" th:if="${resource.resourceType==2}">
+																<div class="upimg2">
+																	<!-- 有0的地方都是要读数据id的 -->
+																	<label class="fileupdat">
+																		<input type="file" id="file0" th:id="${'file'+(stat.index+1)}" name="images" accept="image/*" th:attr="data-istop=${stat.index+1}" data-istop="0" onchange="addImg('file0')" th:onchange="${'addImg('''+'file'+(stat.index+1)+''')'}" value="" class="upfile" required>
+																		<img src="assets/images/base/1.jpg" th:src="${resource.imageUrl}">
+																	</label>
+																	<i class="trashbtn icon-trash icon-2x" onclick="delMedia(this)"></i>
+																</div>
+															</div>
+															<label class="col-md-3 control-label no-padding-right" th:if="${resource.resourceType==1}">视频文件</label>
+															<div class="col-md-7" th:if="${resource.resourceType==1}">
+																<input type="file" th:value="${resource.videoUrl}" accept=".mp4" name="videos" th:attr="data-istop=${stat.index+1}"  class="form-control pad4_12"><i class="trashbtn icon-trash icon-2x" onclick="delMedia(this)"></i>
+															</div>
+															<label class="col-md-3 control-label no-padding-right" th:if="${resource.resourceType==1}">视频预览图</label>
+															<div class="col-md-9" th:if="${resource.resourceType==1}">
+																<div class="upimg2">
+																	<label class="fileupdat"><input type="file" id="file1" th:id="${'file'+(stat.index+1)}" name="preimages" data-istop="1" th:attr="data-istop=${stat.index+1}"accept="image/*" onchange="addImg('file0')" th:onchange="${'addImg('''+'file'+(stat.index+1)+''')'}" value="" class="upfile" required><img th:src="${resource.imageUrl}" src="assets/images/base/1.jpg"></label>
+																</div>
+															</div>
+														</li>
+													</ol>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-3 control-label no-padding-right">视频背景图</label>
+											<div class="col-md-9">
+												<div class="upshare2">
+													<label class="fileupdat">
+														<input type="file" id="upshare2" name="bgImages" accept="image/*" onchange="upshare_2()" class="upfile">
+														<img src="assets/images/base/plus.png" th:src="${activity.bgImageUrl}">
+													</label>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-3 control-label no-padding-right">分享图片</label>
+											<div class="col-md-9">
+												<div class="upshare">
+													<label class="fileupdat">
+														<input type="file" id="upshare" name="shareImg" accept="image/*" onchange="upshare1()" class="upfile">
+														<img src="assets/images/base/plus2.png" th:src="${activity.shareImage}">
+														<!-- 回显图片链接写在img里就ok了 -->
+													</label>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-3 control-label no-padding-right">视频离顶部高度</label>
+											<div class="col-md-9">
+												<input type="text" placeholder="只用于横屏,竖屏不填" style="width:180px; display: inline-block;" name="topPre" th:value="${activity.topPre}" class="form-control">
+												<span class="control-label text-left-i">0-100，建议居中位置为50</span>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-3 control-label no-padding-right">分享标题</label>
+											<div class="col-md-9">
+												<input type="text" placeholder="分享标题" name="shareTitle" th:value="${activity.shareTitle}"
+													   class="form-control">
+											</div>
+										</div>
+										<div class="form-group col-md-6 hei34">
+											<label class="col-md-3 control-label no-padding-right">切换效果</label>
+											<div class="col-md-4 form-inline">
+												<div class="radio inline-btn">
+													<label>
+														<input name="switchType" type="radio" class="ace" value="1" checked th:if="${activity.switchType=='1'}">
+														<input name="switchType" type="radio" class="ace" value="1" th:if="${activity.switchType!='1'}">
+														<span class="lbl"> 上下</span>
+													</label>
+												</div>
+												<div class="radio inline-btn">
+													<label>
+														<input name="switchType" type="radio" class="ace" value="2" checked th:if="${activity.switchType=='2'}">
+														<input name="switchType" type="radio" class="ace" value="2" th:if="${activity.switchType!='2'}">
+														<span class="lbl"> 左右</span>
+													</label>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-3 control-label no-padding-right">分享描述</label>
+											<div class="col-md-9">
+												<input type="text" placeholder="分享描述" name="shareDesc" th:value="${activity.shareDesc}"
+													   class="form-control">
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-3 control-label no-padding-right">背景音乐</label>
+											<div class="col-md-9">
+												<input type="file" name="audio" class="form-control pad4_12" accept=".mp3">
+												<audio src="333" th:src="${activity.audioUrl}" controls></audio>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="col-md-3 control-label no-padding-right">滑动音效</label>
+											<div class="col-md-9">
+												<input type="file" name="stAudio" class="form-control pad4_12" accept=".mp3">
+												<audio src="333" th:src="${activity.switchAudioUrl}" controls></audio>
+											</div>
+										</div>
+										<!--<div class="form-group col-md-6">
+											<label class="col-md-3 control-label no-padding-right">选择箭头颜色</label>
+											<div class="col-md-2">
+												<input type="color" class="form-control pad4_12 chkcolor">
+												&lt;!&ndash; 色号直接取chkcolor的val值 &ndash;&gt;
+											</div>
+										</div>-->
+										<div class="row"></div>
+										<!--<div class="form-group col-md-6">
+                                            <label class="col-md-3 control-label no-padding-right"><a onclick="preview()">生成预览二维码</a></label>
+                                            <div class="col-md-9">
+                                                <div class="okewm preview" id="preview"></div>
+                                            </div>
+                                        </div>-->
+										<div class="form-group col-md-6">
+											<label class="col-md-3 control-label no-padding-right"><a onclick="share()">生成分享二维码</a></label>
+											<div class="col-md-9">
+												<div class="okewm share" id="share"></div>
+											</div>
+										</div>
+										<div class="row"></div>
+										<div class="clearfix form-actions">
+											<div class="text-center">
+												<button class="btn btn-info" type="button" onclick="submitForm()">
+													<i class="icon-ok bigger-110"></i>
+													提交
+												</button>
+
+												&nbsp; &nbsp; &nbsp;
+												<button class="btn" type="reset">
+													<i class="icon-undo bigger-110"></i>
+													重置
+												</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+
+						<!-- PAGE CONTENT ENDS -->
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div><!-- /.page-content -->
+		</div><!-- /.main-content -->
+	</div><!-- /.main-container-inner -->
+
+	<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-md btn-inverse">
+		<i class="icon-double-angle-up icon-only bigger-110"></i>
+	</a>
+</div><!-- /.main-container -->
+
+<div class="wait-bg">
+	<div class="wait-box">
+		<p><span></span>上传中，请稍后…</p>
+	</div>
+</div>
+<script type="text/javascript">
+    function showWait(){
+        $(".wait-bg").show();
+    }
+    function hideWait(){
+        $(".wait-bg").hide();
+    }
+</script>
+
+<script src="assets/js/common.js" th:src="@{/assets/js/common.js}"></script>
+<script type="text/javascript">
+    //添加图片
+    function addImg(addImgId) {
+        var r = new FileReader();
+        f = document.getElementById(addImgId).files[0];
+        r.readAsDataURL(f);
+        r.onload = function (e) {
+            $("#" + addImgId).closest(".upimg2").find("img").attr("src", this.result)
+        };
+    }
+    //预览图片
+    function upshare1() {
+        var r = new FileReader();
+        f = document.getElementById("upshare").files[0];
+        r.readAsDataURL(f);
+        r.onload = function (e) {
+            $("#upshare").closest(".upshare").find("img").attr("src", this.result)
+        };
+    }
+    //视频背景图
+    function upshare_2() {
+        var r = new FileReader();
+        f = document.getElementById("upshare2").files[0];
+        r.readAsDataURL(f);
+        r.onload = function (e) {
+            $("#upshare2").closest(".upshare2").find("img").attr("src", this.result)
+        };
+    }
+    var istop = 0;//上传的图片或视频顺序
+    var mediaNum = $('.upimg2').length;//上传的媒体数量
+    if (mediaNum > 0) {
+        istop = $('.upimg2').last().eq(0).find("input").data("istop")
+    }
+
+    //添加图片按钮
+    function addImgBtn() {
+        istop++;
+        mediaNum++;
+        //往页面ol中注入媒体元素
+        var media = '<li class="form-group"><input type="hidden" name="activityResourceIds"/><input type="hidden" value="2" name="resourceTypes"/>';
+        media += '<label class="col-md-3 control-label no-padding-right">图片</label><div class="col-md-9"><div class="upimg2"><label class="fileupdat"><input type="file" id="file' + istop + '" name="images" data-istop="' + istop + '" accept="image/*" onchange="addImg(&quot;file' + istop + '&quot;)" value="" class="upfile" required> <img src="/assets/images/base/plus.png"></label><i class="trashbtn icon-trash icon-2x" onclick="delMedia(this)"></i></div></div>'
+        media += '</li>'
+        $(".input-media").find("ol").append(media);
+        $(".trashbtn").on("click", function () {
+            delMedia()
+        })
+    }
+
+    //添加视频按钮
+    function addMediaBtn() {
+        if (mediaNum == 0) {
+            alert("请先选择要上传的图片！");
+            return false;
+        }
+        istop++;
+        mediaNum++;
+        //往页面ol中注入媒体元素
+        var media = '<li class="form-group"><input type="hidden" name="activityResourceIds"/><input type="hidden" value="1" name="resourceTypes"/>';
+        media += '<label class="col-md-3 control-label no-padding-right">视频文件</label><div class="col-md-7"><input type="file" name="videos" accept=".mp4" data-istop="' + istop + '" class="form-control pad4_12"><i class="trashbtn icon-trash icon-2x" onclick="delMedia(this)"></i></div>';
+        media += '<label class="col-md-3 control-label no-padding-right">视频预览图</label><div class="col-md-9"><div class="upimg2"><label class="fileupdat"><input type="file" id="file' + istop + '" name="preimages" data-istop="' + istop + '" accept="image/*" onchange="addImg(&quot;file' + istop + '&quot;)" value="" class="upfile" required> <img src="/assets/images/base/plus.png"></label></div></div>'
+        media += '</li>'
+        $(".input-media").find("ol").append(media);
+        $(".trashbtn").on("click", function () {
+            delMedia()
+        })
+    }
+
+    //删除对应视频或者图片
+    function delMedia(_this) {
+        $(_this).closest("li").remove();
+        mediaNum--;
+    }
+
+    //上传活动前需要判断istop最小值的元素中是否包含"视频ID"文字，如存在则提示"上传的第一个媒体不能为视频"
+</script>
+<script type="text/javascript">
+    function preview() {
+        $(".preview").html("");
+        // 设置参数方式
+        var qrcode = new QRCode('preview', {
+            text: 'http://weizhi.njjinchuan.com/activity/index?activityId='+$("#activityId").val(),
+            width: 200,
+            height: 200,
+            colorDark: '#000000',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.H
+        });
+        // 使用 API
+        qrcode.clear();
+        qrcode.makeCode('new content');
+    }
+
+    function share() {
+        $(".share").html("");
+        // 设置参数方式
+        var qrcode = new QRCode('share', {
+            text: 'http://weizhi.njjinchuan.com/activity/index?activityId='+$("#activityId").val(),
+            width: 200,
+            height: 200,
+            colorDark: '#000000',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.H
+        });
+        // 使用 API
+        qrcode.clear();
+        qrcode.makeCode('http://weizhi.njjinchuan.com/activity/index?activityId='+$("#activityId").val());
+    }
+</script>
+<script>
+    //提交
+    function submitForm() {
+        if ($("#activityName").val() == "") {
+            return false;
+        }
+        showWait();
+        $("#myForm").submit();
+    }
+</script>
+</body>
+</html>

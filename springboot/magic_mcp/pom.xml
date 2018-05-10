@@ -27,6 +27,16 @@
 			<version>${project.parent.version}</version>
 		</dependency>
 
+		<!--web安全-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<!--thymeleaf 支持 spring security-->
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
+		</dependency>
 
     </dependencies>
 

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<header th:fragment="left">
+    <a class="menu-toggler" id="menu-toggler" href="#">
+        <span class="menu-text"></span>
+    </a>
+    <div class="sidebar" id="sidebar">
+        <script type="text/javascript">
+            try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+        </script>
+        <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+            <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+                <button class="btn btn-success">
+                    可
+                </button>
+
+                <button class="btn btn-info">
+                    配
+                </button>
+
+                <button class="btn btn-warning">
+                    置
+                </button>
+
+                <button class="btn btn-danger">
+                    项
+                </button>
+            </div>
+
+            <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+                <span class="btn btn-success"></span>
+
+                <span class="btn btn-info"></span>
+
+                <span class="btn btn-warning"></span>
+
+                <span class="btn btn-danger"></span>
+            </div>
+        </div><!-- #sidebar-shortcuts -->
+
+        <ul class="nav nav-list">
+            <li>
+                <a href="index.html" th:href="@{/cms/home/index}">
+                    <i class="icon-dashboard"></i>
+                    <span class="menu-text"> 首页 </span>
+                </a>
+            </li>
+            <li>
+                <a href="activity.html" th:href="@{/cms/activity/list}">
+                    <i class="icon-group"></i>
+                    <span class="menu-text"> 活动管理 </span>
+                </a>
+            </li>
+            <li>
+                <a href="notice.html" th:href="@{/cms/access/list}">
+                    <i class="icon-comment"></i>
+                    <span class="menu-text"> 访问管理 </span>
+                </a>
+            </li>
+            <li>
+                <a href="statistic.html" th:href="@{/cms/accessStatistics/list}">
+                    <i class="icon-signal"></i>
+                    <span class="menu-text"> 数据统计 </span>
+                </a>
+            </li>
+        </ul><!-- /.nav-list -->
+
+        <div class="sidebar-collapse" id="sidebar-collapse">
+            <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+        </div>
+        <script type="text/javascript">
+            try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+        </script>
+    </div>
+</header>
+</html>

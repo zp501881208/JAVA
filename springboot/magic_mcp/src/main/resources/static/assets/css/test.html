@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>test</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
+  <link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.3.5/skins/default/aliplayer-min.css"/>
+  <style type="text/css">
+    *{ padding:0; margin:0; }
+    .swiper-container{ width: 100%; height: 100%; }
+    .nextpage{ animation: 2s fadeOutUp ease-in-out infinite; position: absolute; top: 90%; left: 45%; width: 10%; z-index: 2;}
+    .music{ position: absolute; top: 6%; right:6%; width: 8%; z-index: 2; }
+    .music img{ width: 100%; height: 100%; animation: 3s rotateR linear infinite; border-radius: 50%; }
+    .music img.paused{animation-play-state:paused;}
+    .fadeOutUp { animation: 2s fadeOutUp ease-in-out infinite;}
+    @keyframes fadeOutUp{
+      0%{opacity:1;-webkit-transform:translateY(0);-ms-transform:translateY(0);transform:translateY(0);}
+      50%{opacity:0.3;-webkit-transform:translateY(-20px);-ms-transform:translateY(-20px);transform:translateY(-20px);}
+    }
+    @keyframes rotateR{
+      0%{ transform: rotate(0deg); -webkit-transform: rotate(0deg); -ms-transform: rotate(0deg); }
+      100%{ transform: rotate(360deg); -webkit-transform: rotate(360deg); -ms-transform: rotate(360deg); }
+    }
+    .blue{ background: #58c3e4; }
+    .red{ background: red; }
+  </style>
+</head>
+<body>
+<div class="swiper-container">
+  <div class="swiper-wrapper mediatype">
+    <div class="swiper-slide blue" data-type=0  data-hash="slide1"></div>
+    <div class="swiper-slide" data-type=1 data-hash="slide2">
+      <div class="prism-player" id="J_prismPlayer"></div>
+      <video class="videoClass" width="100%" height="100%" id="thevideo4" preload="auto" src="http://www.langkuncn.com/1.mp4" poster="http://www.langkuncn.com/1.jpg" controls=""></video>
+    </div>
+    <div class="swiper-slide red" data-type=0 data-hash="slide3"></div>
+    <div class="swiper-slide" data-type=1 data-hash="slide4">
+      <video class="videoClass" width="100%" height="100%" id="thevideo4" preload="auto" src="http://www.langkuncn.com/5.mp4" poster="http://www.langkuncn.com/1.jpg" controls=""></video>
+    </div>
+  </div>  
+  <div id="nextpage" class="nextpage">
+    <img width="100%" src="https://app.www.gov.cn/govdata/html5/2018/huangbo/image/arrwo.png">
+  </div>
+  <div class="music" onclick="controlMusic()">
+    <img class="paused" src="https://image.freepik.com/free-icon/music-note-with-loop-circular-arrows-around_318-42922.jpg">
+    <audio src="http://www.langkuncn.com/summer.mp3" autoplay preload="auto"></audio>
+  </div>
+</div>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
+<script type="text/javascript" src="https://g.alicdn.com/de/prismplayer/2.3.5/aliplayer-min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+  var u = navigator.userAgent, app = navigator.appVersion;
+  var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+  var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+  $("body").height($(window).height());
+  $(function(){
+    //stopVideo();
+    document.addEventListener("WeixinJSBridgeReady", function () {
+      $("audio")[0].play();
+    }, false);
+  })
+  $('#nextpage').click(function(){
+    mySwiper.slideNext();
+  })
+  var swdis = "vertical";//设置页面滑动方向，horizontal 水平滑动，vertical 垂直滑动
+  var mySwiper = new Swiper ('.swiper-container', {
+    direction: swdis,
+    loop: true,
+    hashNavigation: {
+      watchState: true,
+    },
+    // 下一页按钮
+    navigation: {
+      nextEl: '.swiper-button-next',
+      //prevEl: '.swiper-button-prev',
+    },
+    on: {
+      slideChangeTransitionEnd: function(){
+        var nowIndex = $(".mediatype .swiper-slide").eq(this.activeIndex);
+        var mediaType = nowIndex.data("type");//媒体类型，0是图片，1是视频
+        if(mediaType==0){
+          //显示音乐,type=1是页面处于图片部分的操作
+          $(".music img").removeClass("paused");
+          $(".music").show();
+          $("audio")[0].play();
+          document.addEventListener("WeixinJSBridgeReady", function () { 
+            $("audio")[0].play();
+          }, false);
+          stopVideo();
+        }else if(mediaType==1){
+          //停止音乐，type=1是页面处于视频部分的操作
+          $(".music img").addClass("paused");
+          $(".music").hide();
+          stopMusic();
+          document.addEventListener("WeixinJSBridgeReady", function () { 
+            nowIndex.find("video")[0].play();
+          }, false);
+          nowIndex.find("video")[0].addEventListener("ended", function() 
+          {
+            mySwiper.slideNext();
+          });
+        }
+      },
+    },
+  })    
+  //退出全屏，暂时无效；
+  function exitFullscreen() { 
+    if(document.exitFullscreen) { 
+    document.exitFullscreen(); 
+    } else if(document.mozExitFullScreen) { 
+    document.mozExitFullScreen(); 
+    } else if(document.webkitExitFullscreen) { 
+    document.webkitExitFullscreen(); 
+    } 
+  } 
+
+  //停止视频播放
+  function stopVideo(){
+    $("video").trigger("pause");
+  }
+  //停止音乐播放
+  function stopMusic(){
+    $("audio").trigger("pause");
+    $(".music").hide();
+  } 
+  //音乐图标控制
+  function controlMusic(){
+    if($("audio")[0].paused){
+      $("audio")[0].play();
+      $(".music img").removeClass("paused");
+    }else{
+      $("audio")[0].pause();
+      $(".music img").addClass("paused");
+    }
+  }
+</script>
+</body>
+</html>
