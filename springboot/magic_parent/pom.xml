@@ -19,6 +19,8 @@
 	<modules>
 		<module>../magic_core</module>
 		<module>../magic_stare</module>
+		<module>../magic_mcp</module>
+
 	</modules>
 
 	<properties>
