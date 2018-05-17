@@ -1,12 +1,17 @@
 package com.magict.magic.compoment;
 
 import com.magict.magic.entity.Admin;
+import com.magict.magic.entity.Menu;
 import com.magict.magic.enums.BooleanEnum;
+import com.magict.magic.service.AdminRoleService;
 import com.magict.magic.service.AdminService;
+import com.magict.magic.service.MenuService;
+import com.magict.magic.service.RoleMenuService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,6 +29,12 @@ import java.util.List;
 public class SecurityCmpt implements UserDetailsService {
     @Autowired
     AdminService adminService;
+    @Autowired
+    AdminRoleService adminRoleService;
+    @Autowired
+    RoleMenuService roleMenuService;
+    @Autowired
+    MenuService menuService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -40,6 +51,12 @@ public class SecurityCmpt implements UserDetailsService {
         }
         //根据admin角色查询权限
         List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList();
+        List<Menu> menuList = menuService.findAdminMenu(admin.getAdminId());
+        menuList.forEach(menu -> {
+            SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(menu.getMenuId());
+            authorities.add(simpleGrantedAuthority);
+        });
         return new User(username,admin.getLoginPassword(),true,true,true,true,authorities);
     }
+
 }

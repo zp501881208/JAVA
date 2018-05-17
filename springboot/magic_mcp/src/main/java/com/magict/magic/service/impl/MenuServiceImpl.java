@@ -6,6 +6,8 @@ import com.magict.magic.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
 * 菜单表实现
 * @author zp
@@ -17,4 +19,8 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
     private MenuMapper menuMapper;
 
 
+    @Override
+    public List<Menu> findAdminMenu(Integer adminId) {
+        return menuMapper.selectAdminMenu(adminId);
+    }
 }

@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.weekend.WeekendSqls;
 
-import java.util.List;
-
 /**
  * 范例
  *         List<WxUser> wxUserList = wxUserMapper.selectByExample(new Example.Builder(WxUser.class)
