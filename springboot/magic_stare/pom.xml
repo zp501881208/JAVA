@@ -30,14 +30,13 @@
 
     </dependencies>
 
-	<build>
-		<!--<plugins>
+<!--	<build>
+		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			&lt;!&ndash;
-                         为了创建可执行的jar，我们需要将 spring-boot-maven-plugin 添加
+
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-compiler-plugin</artifactId>
@@ -45,8 +44,8 @@
                                 <source>1.8</source>
                                 <target>1.8</target>
                             </configuration>
-                        </plugin>&ndash;&gt;
-		</plugins>-->
-	</build>
+                        </plugin>
+		</plugins>
+	</build>-->
 
 </project>

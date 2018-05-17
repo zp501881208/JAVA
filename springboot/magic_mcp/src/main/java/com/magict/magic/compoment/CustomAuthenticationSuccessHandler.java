@@ -34,6 +34,7 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         //将用户信息存到session
         request.getSession().setAttribute(Constants.SESSION_ADMIN,admin);
         //重定向到首页
-        response.sendRedirect("/index");
+        String contextPath = request.getContextPath();
+        response.sendRedirect(contextPath+"/home/index");
     }
 }

@@ -33,16 +33,12 @@ public class SecurityCmpt implements UserDetailsService {
         //根据账号查询用户信息
         Admin admin = adminService.findByLoginName(username);
         if(admin==null){
-            new UsernameNotFoundException("账号不存在");
+            throw new UsernameNotFoundException("账号不存在");
         }
-        if(BooleanEnum.NO.getKey().equals(admin.getAdminStatus())){
-            new UsernameNotFoundException("账号已冻结");
+        if(admin.getAdminStatus()==0){
+            throw new UsernameNotFoundException("账号已冻结");
         }
         //根据admin角色查询权限
-
-
-
-
         List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList();
         return new User(username,admin.getLoginPassword(),true,true,true,true,authorities);
     }

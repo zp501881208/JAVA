@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,6 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
@@ -29,16 +31,34 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                //除home页面外其余页面需要登录才可访问
-                .antMatchers("/home").permitAll()
+//        http.authorizeRequests()
+//                //除home页面外其余页面需要登录才可访问
+//                .antMatchers("/home/public").permitAll()
+//                .anyRequest().authenticated()
+//                //登录
+//                .and().formLogin().loginPage("/login").successHandler(customAuthenticationSuccessHandler)
+//                .permitAll()
+//                //无权访问
+//                .and().exceptionHandling().accessDeniedPage("/unauthorize")
+//                .and().httpBasic();
+        http.csrf().disable().
+                //iframe同源可访问
+                        headers().frameOptions().sameOrigin().
+                //所有请求登陆后可访问
+                and().authorizeRequests()
+                .antMatchers("/home/homepage").permitAll()
                 .anyRequest().authenticated()
-                //登录
+                //登陆页面
                 .and().formLogin().loginPage("/login").successHandler(customAuthenticationSuccessHandler)
                 .permitAll()
-                //无权访问
+                .and().logout().logoutUrl("/logout")
+                .permitAll()
+                //没有权限访问页面
                 .and().exceptionHandling().accessDeniedPage("/unauthorize")
                 .and().httpBasic();
+
+
+
     }
 
 
