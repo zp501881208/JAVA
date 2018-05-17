@@ -4,13 +4,13 @@ Navicat MySQL Data Transfer
 Source Server         : 127.0.0.1
 Source Server Version : 50714
 Source Host           : 127.0.0.1:3306
-Source Database       : magic
+Source Database       : magic_dev
 
 Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2018-05-11 20:09:11
+Date: 2018-05-17 10:10:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,4 +37,4 @@ CREATE TABLE `wx_user` (
   `user_type` int(2) NOT NULL DEFAULT '1' COMMENT '用户类型',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='微信用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='微信用户表';

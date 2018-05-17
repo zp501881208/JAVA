@@ -4,13 +4,13 @@ Navicat MySQL Data Transfer
 Source Server         : 127.0.0.1
 Source Server Version : 50714
 Source Host           : 127.0.0.1:3306
-Source Database       : magic
+Source Database       : magic_dev
 
 Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2018-05-11 20:10:51
+Date: 2018-05-17 10:10:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,5 +26,6 @@ CREATE TABLE `admin` (
   `login_password` varchar(255) NOT NULL COMMENT '登录密码',
   `admin_status` int(1) NOT NULL DEFAULT '1' COMMENT '状态:0不可用1可用......',
   `admin_trunk` int(1) NOT NULL DEFAULT '1' COMMENT '分支(预留)',
-  PRIMARY KEY (`admin_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='管理员表';
+  PRIMARY KEY (`admin_id`),
+  UNIQUE KEY `login_name` (`login_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='管理员表';
