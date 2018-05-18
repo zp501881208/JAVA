@@ -43,7 +43,7 @@ public class SecurityCmpt implements UserDetailsService {
         }
         //根据账号查询用户信息
         Admin admin = adminService.findByLoginName(username);
-        if(admin==null){
+        if(null==admin){
             throw new UsernameNotFoundException("账号不存在");
         }
         if(admin.getAdminStatus()==0){
