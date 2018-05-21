@@ -7,6 +7,7 @@ jQuery(document).ready(function() {
     var pathName = document.location.pathname;
     var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
     $.backstretch(projectName+"/assets/images/base/1.jpg");
+
     /*
         Form validation
     */

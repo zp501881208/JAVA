@@ -12,4 +12,8 @@ package com.magict.magic.constants;/**
  */
 public class Constants {
     public final static String SESSION_ADMIN = "admin";
+
+    public final static String SESSION_MENU_TOP = "menuTop";
+
+    public final static String SESSION_MENU_TREE = "menuTree";
 }

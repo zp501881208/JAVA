@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
-<header th:fragment="left">
-    <a class="menu-toggler" id="menu-toggler" href="#">
+<script type="text/javascript">
+    var pathName = document.location.pathname;
+    var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+
+//    $('a').each(function(){
+//        var href = $(this).attr('href');
+//        $(this).attr('href',projectName+href);
+//    });
+</script>
+
+    <!--<a class="menu-toggler" id="menu-toggler" href="#">
         <span class="menu-text"></span>
-    </a>
-    <div class="sidebar" id="sidebar">
+    </a>-->
+    <div class="sidebar" id="sidebar" th:fragment="left">
         <script type="text/javascript">
             try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
         </script>
         <div class="sidebar-shortcuts" id="sidebar-shortcuts">
             <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
                 <button class="btn btn-success">
-                    可
+                    首页
                 </button>
 
                 <button class="btn btn-info">
@@ -21,7 +30,6 @@
                 <button class="btn btn-warning">
                     置
                 </button>
-
                 <button class="btn btn-danger">
                     项
                 </button>
@@ -38,39 +46,39 @@
             </div>
         </div><!-- #sidebar-shortcuts -->
 
-        <ul class="nav nav-list">
-            <li>
-                <a href="index.html" th:href="@{/cms/home/index}">
+        <ul class="nav nav-list" th:each="menu:${session.menuTop}">
+           <!-- <li>
+                <a href="index" >
                     <i class="icon-dashboard"></i>
                     <span class="menu-text"> 首页 </span>
                 </a>
-            </li>
+            </li>-->
+            <!-- 菜单列表（有权访问） -->
             <li>
-                <a href="activity.html" th:href="@{/cms/activity/list}">
-                    <i class="icon-group"></i>
-                    <span class="menu-text"> 活动管理 </span>
+                <a th:href="${menu.functionUrl}">
+                    <i th:class="${menu.functionIcon}"></i>
+                    <span class="menu-text" th:text="${menu.functionName}"></span>
                 </a>
             </li>
-            <li>
-                <a href="notice.html" th:href="@{/cms/access/list}">
-                    <i class="icon-comment"></i>
-                    <span class="menu-text"> 访问管理 </span>
-                </a>
-            </li>
-            <li>
-                <a href="statistic.html" th:href="@{/cms/accessStatistics/list}">
-                    <i class="icon-signal"></i>
-                    <span class="menu-text"> 数据统计 </span>
-                </a>
-            </li>
+
+            <ul th:each="childMenu:${session.menuTree[menu.orderNum]}">
+                <li>
+                    <a th:href="${childMenu.functionUrl}">
+                        <i th:class="${childMenu.functionIcon}"></i>
+                        <span class="menu-text" th:text="${childMenu.functionName}"></span>
+                    </a>
+                </li>
+
+            </ul>
+
         </ul><!-- /.nav-list -->
 
         <div class="sidebar-collapse" id="sidebar-collapse">
             <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
         </div>
         <script type="text/javascript">
+
             try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
         </script>
     </div>
-</header>
 </html>

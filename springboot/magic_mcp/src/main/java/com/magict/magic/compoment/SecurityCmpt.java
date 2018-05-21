@@ -2,11 +2,8 @@ package com.magict.magic.compoment;
 
 import com.magict.magic.entity.Admin;
 import com.magict.magic.entity.Menu;
-import com.magict.magic.enums.BooleanEnum;
-import com.magict.magic.service.AdminRoleService;
 import com.magict.magic.service.AdminService;
 import com.magict.magic.service.MenuService;
-import com.magict.magic.service.RoleMenuService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,10 +26,6 @@ import java.util.List;
 public class SecurityCmpt implements UserDetailsService {
     @Autowired
     AdminService adminService;
-    @Autowired
-    AdminRoleService adminRoleService;
-    @Autowired
-    RoleMenuService roleMenuService;
     @Autowired
     MenuService menuService;
 

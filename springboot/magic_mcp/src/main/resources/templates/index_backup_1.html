@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+	<title>微智传媒管理系统-首页</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- basic styles -->
+
+	<link href="assets/css/bootstrap.min.css" th:href="@{/assets/css/bootstrap.min.css}" rel="stylesheet" />
+	<link rel="stylesheet" href="assets/css/font-awesome.min.css" th:href="@{/assets/css/font-awesome.min.css}"/>
+	<!--[if IE 7]>
+	<link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css"/>
+	<![endif]-->
+	<!-- page specific plugin styles -->
+	<!-- fonts -->
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+	<!-- ace styles -->
+	<link rel="stylesheet" href="assets/css/ace.min.css" th:href="@{/assets/css/ace.min.css}"/>
+	<link rel="stylesheet" href="assets/css/ace-rtl.min.css" th:href="@{/assets/css/ace-rtl.min.css}"/>
+	<link rel="stylesheet" href="assets/css/ace-skins.min.css" th:href="@{/assets/css/ace-skins.min.css}"/>
+	<!--[if lte IE 8]>
+	<link rel="stylesheet" href="assets/css/ace-ie.min.css" th:href="@{/assets/css/ace-ie.min.css}"/>
+	<![endif]-->
+	<!-- inline styles related to this page -->
+	<!-- ace settings handler -->
+	<script src="assets/js/ace-extra.min.js" th:src="@{/assets/js/ace-extra.min.js}"></script>
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="assets/js/html5shiv.js" th:src="@{/assets/js/html5shiv.js}"></script>
+	<script src="assets/js/respond.min.js" th:src="@{/assets/js/respond.min.js}"></script>
+	<![endif]-->
+
+	<!-- basic scripts -->
+
+	<script src="assets/js/jquery-2.0.3.min.js" th:src="@{/assets/js/jquery-2.0.3.min.js}"></script>
+
+	<!-- <![endif]-->
+
+	<script type="text/javascript">
+        if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+	</script>
+	<script src="assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
+	<script src="assets/js/typeahead-bs2.min.js" th:src="@{/assets/js/typeahead-bs2.min.js}"></script>
+	<!-- page specific plugin scripts -->
+	<!--[if lte IE 8]>
+	<script src="assets/js/excanvas.min.js" th:src="@{/assets/js/excanvas.min.js}"></script>
+	<![endif]-->
+
+	<script src="assets/js/jquery-ui-1.10.3.custom.min.js" th:src="@{/assets/js/jquery-ui-1.10.3.custom.min.js}"></script>
+	<script src="assets/js/jquery.ui.touch-punch.min.js" th:src="@{/assets/js/jquery.ui.touch-punch.min.js}"></script>
+	<script src="assets/js/jquery.slimscroll.min.js" th:src="@{/assets/js/jquery.slimscroll.min.js}"></script>
+	<script src="assets/js/jquery.easy-pie-chart.min.js" th:src="@{/assets/js/jquery.easy-pie-chart.min.js}"></script>
+	<script src="assets/js/jquery.sparkline.min.js" th:src="@{/assets/js/jquery.sparkline.min.js}"></script>
+	<script src="assets/js/flot/jquery.flot.min.js" th:src="@{/assets/js/flot/jquery.flot.min.js}"></script>
+	<script src="assets/js/flot/jquery.flot.pie.min.js" th:src="@{/assets/js/flot/jquery.flot.pie.min.js}"></script>
+	<script src="assets/js/flot/jquery.flot.resize.min.js" th:src="@{/assets/js/flot/jquery.flot.resize.min.js}"></script>
+
+	<!-- ace scripts -->
+
+	<script src="assets/js/ace-elements.min.js" th:src="@{/assets/js/ace-elements.min.js}"></script>
+	<script src="assets/js/ace.min.js" th:src="@{/assets/js/ace.min.js}"></script>
+
+	<!-- inline scripts related to this page -->
+</head>
+
+<body>
+<div class="navbar navbar-default" id="navbar">
+	<script type="text/javascript">
+        try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+	</script>
+
+	<div class="navbar-container" id="navbar-container">
+		<div class="navbar-header pull-left">
+			<a href="#">
+				<small>
+					<img src="assets/images/base/logo.png" th:src="@{/assets/images/base/logo.png}" style="height: 45px; padding: 5px 0">
+				</small>
+			</a><!-- /.brand -->
+		</div><!-- /.navbar-header -->
+
+		<div class="navbar-header pull-right" role="navigation">
+			<ul class="nav ace-nav">
+				<!--<li class="light-blue">
+					<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+						<i class="icon-bell-alt icon-animated-bell"></i>
+						<span class="badge badge-important">8</span>
+					</a>
+
+					<ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+						<li class="dropdown-header">
+							<i class="icon-warning-sign"></i>
+							8 条未读信息
+						</li>
+
+						<li>
+							<a href="notice.html">
+								<div class="clearfix">
+											<span class="pull-left">
+												<i class="btn btn-xs no-hover btn-pink icon-comment"></i>
+												通知列表
+											</span>
+									<span class="pull-right badge badge-info">+8</span>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</li>-->
+				<li class="light-blue">
+					<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+						<!--<img class="nav-user-photo" src="assets/avatars/user.jpg" th:src="@{/assets/avatars/user.jpg}" alt="瘤董事长" />-->
+						<span class="user-info" style="line-height:30px;">
+							<small th:text="'Welcome,'+${session.admin.adminName}"></small>
+						</span>
+
+						<i class="icon-caret-down"></i>
+					</a>
+
+					<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+						<!--<li>
+							<a href="#">
+								<i class="icon-user"></i>
+								修改密码
+							</a>
+						</li>-->
+
+						<li class="divider"></li>
+
+						<li>
+							<a href="#" th:href="@{/cms/logout}">
+								<i class="icon-off"></i>
+								退出
+							</a>
+						</li>
+					</ul>
+				</li>
+			</ul><!-- /.ace-nav -->
+		</div><!-- /.navbar-header -->
+	</div><!-- /.container -->
+</div>
+
+<div class="main-container" id="main-container">
+	<script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+	</script>
+
+	<div class="main-container-inner">
+		<a class="menu-toggler" id="menu-toggler" href="#">
+			<span class="menu-text"></span>
+		</a>
+
+		<div class="sidebar" id="sidebar">
+			<script type="text/javascript">
+                try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+				<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+					<button class="btn btn-success">
+						微
+					</button>
+
+					<button class="btn btn-info">
+						智
+					</button>
+
+					<button class="btn btn-warning">
+						传
+					</button>
+
+					<button class="btn btn-danger">
+						媒
+					</button>
+				</div>
+
+				<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+					<span class="btn btn-success"></span>
+
+					<span class="btn btn-info"></span>
+
+					<span class="btn btn-warning"></span>
+
+					<span class="btn btn-danger"></span>
+				</div>
+			</div><!-- #sidebar-shortcuts -->
+
+			<ul class="nav nav-list">
+				<li>
+					<a href="index_backup.html" th:href="@{/cms/home/index}">
+						<i class="icon-dashboard"></i>
+						<span class="menu-text"> 首页 </span>
+					</a>
+				</li>
+
+				<li>
+					<a href="activity.html" th:href="@{/cms/activity/list}">
+						<i class="icon-group"></i>
+						<span class="menu-text"> 活动管理 </span>
+					</a>
+				</li>
+
+				<li>
+					<a href="notice.html" th:href="@{/cms/access/list}">
+						<i class="icon-comment"></i>
+						<span class="menu-text"> 访问管理 </span>
+					</a>
+				</li>
+
+				<li>
+					<a href="statistic.html" th:href="@{/cms/accessStatistics/list}">
+						<i class="icon-signal"></i>
+						<span class="menu-text"> 数据统计 </span>
+					</a>
+				</li>
+			</ul><!-- /.nav-list -->
+
+			<div class="sidebar-collapse" id="sidebar-collapse">
+				<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+			</div>
+
+			<script type="text/javascript">
+                try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+			</script>
+		</div>
+
+		<div class="main-content">
+			<div class="breadcrumbs" id="breadcrumbs">
+				<script type="text/javascript">
+                    try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+				</script>
+
+				<ul class="breadcrumb">
+					<li>
+						<i class="icon-home home-icon"></i>
+						<a>首页</a>
+					</li>
+				</ul><!-- .breadcrumb -->
+			</div>
+
+			<div class="page-content">
+				<div class="row">
+					<div class="col-xs-12">
+						<!-- PAGE CONTENT BEGINS -->
+						<div class="alert alert-block alert-success">
+							<button type="button" class="close" data-dismiss="alert">
+								<i class="icon-remove"></i>
+							</button>
+
+							<i class="icon-ok green"></i>
+
+							欢迎使用
+							<strong class="green">
+								微智传媒后台管理系统
+								<small>(v1.0)</small>
+							</strong>
+						</div>
+						<div class="row">
+							<div class="space-6"></div>
+
+							<div class="col-sm-7 infobox-container">
+								<div class="infobox infobox-green  ">
+									<div class="infobox-icon">
+										<i class="icon-building"></i>
+									</div>
+
+									<div class="infobox-data">
+										<span class="infobox-data-number" th:text="${totalAccess}">32000</span>
+										<div class="infobox-content">总访问数</div>
+									</div>
+								</div>
+
+								<div class="infobox infobox-pink  ">
+									<div class="infobox-icon">
+										<i class="icon-user"></i>
+									</div>
+
+									<div class="infobox-data">
+										<span class="infobox-data-number" th:text="${personAccess}">11</span>
+										<div class="infobox-content">总人数</div>
+									</div>
+								</div>
+
+								<div class="infobox infobox-blue  ">
+									<div class="infobox-icon">
+										<i class="icon-bookmark"></i>
+									</div>
+
+									<div class="infobox-data">
+										<span class="infobox-data-number" th:text="${todayTotalAccess}">110</span>
+										<div class="infobox-content">日访问数</div>
+									</div>
+									<div class="stat stat-success" th:text="${todayTotalAccessPer+'%'}">1%</div>
+								</div>
+
+								<div class="infobox infobox-red  ">
+									<div class="infobox-icon">
+										<i class="icon-star"></i>
+									</div>
+
+									<div class="infobox-data">
+										<span class="infobox-data-number" th:text="${todayPersonAccess}">1</span>
+										<div class="infobox-content">今日人数</div>
+									</div>
+									<div class="stat stat-success" th:text="${todayPersonAccessPer+'%'}">10%</div>
+								</div>
+
+								<div class="space-6"></div>
+
+								<div class="infobox infobox-blue infobox-small infobox-dark">
+									<div class="infobox-chart">
+										<span class="sparkline" data-values="3,4,2,3,4,4,2,2"></span>
+									</div>
+
+									<div class="infobox-data">
+										<div class="infobox-content">总分享数</div>
+										<div class="infobox-content" th:text="${totalShare}">32,000</div>
+									</div>
+								</div>
+
+								<div class="infobox infobox-grey infobox-small infobox-dark">
+									<div class="infobox-icon">
+										<i class="icon-download-alt"></i>
+									</div>
+
+									<div class="infobox-data">
+										<div class="infobox-content">分享人数</div>
+										<div class="infobox-content" th:text="${personShare}">1,205</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="vspace-sm"></div>
+
+							<div class="col-sm-5">
+								<div id="chart2" style="height:300px;"></div>
+							</div>
+							<div class="vspace-sm"></div>
+
+							<div class="col-sm-12">
+								<div id="chart" style="height:400px;"></div>
+							</div><!-- /span -->
+						</div><!-- /row -->
+
+						<!-- PAGE CONTENT ENDS -->
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div><!-- /.page-content -->
+		</div><!-- /.main-content -->
+	</div><!-- /.main-container-inner -->
+
+	<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+		<i class="icon-double-angle-up icon-only bigger-110"></i>
+	</a>
+</div><!-- /.main-container -->
+<script src="assets/js/common.js" th:src="@{/assets/js/common.js}"></script>
+<script src="assets/js/echarts.common.min.js" th:src="@{/js/echarts.common.min.js}"></script>
+<script type="text/javascript">
+    //折线图
+    var myChart = echarts.init(document.getElementById('chart'));
+    var dateList = new Array();
+    var valueList = new Array();
+    var dataList;
+	$.ajax({
+		url: "/cms/home/accessChat",
+		type:"post",
+		success: function (data) {
+            dataList = data;
+            for (var i=data.length-1;i>=0;i--){
+                dateList.push(data[i].happendTimeStr);
+                valueList.push(data[i].accessTotal);
+            }
+			var option = {
+				// Make gradient line here
+				visualMap: [{
+					show: false,
+					type: 'continuous',
+					seriesIndex: 0,
+					min: 0,
+					max: 400
+				}],
+				title: [{
+					left: 'center',
+					text: '流量监测'
+				}],
+				tooltip: {
+					trigger: 'axis'
+				},
+				xAxis: [{
+					data: dateList
+				}],
+				yAxis: [{
+					splitLine: {show: false}
+				}],
+				grid: [{
+					bottom: '10%'
+				}],
+				series: [{
+					type: 'line',
+					showSymbol: true,
+					data: valueList,
+					itemStyle : {
+						normal : {
+							lineStyle:{
+								color:{
+									type: 'linear',
+									x: 0,
+									y: 0,
+									x2: 0,
+									y2: 1,
+									colorStops: [{
+										offset: 1, color: '#f5eda6' // 0% 处的颜色
+									}, {
+										offset: 0, color: 'red' // 100% 处的颜色
+									}],
+								}
+							}
+						}
+					},
+				}]
+			};
+			myChart.setOption(option);
+		}
+	});
+
+
+    //饼图
+    var myChart2 = echarts.init(document.getElementById('chart2'));
+    $.ajax({
+        url: "/cms/home/operateSystems",
+        type: "post",
+        success: function (data) {
+            var data2 = data;
+            var option2 = {
+                backgroundColor: '#fff',
+
+                title: {
+                    text: '访问来源',
+                    left: 'center',
+                    top: 20,
+                    textStyle: {
+                        color: '#333'
+                    }
+                },
+
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+
+                visualMap: {
+                    show: false,
+                    min: 80,
+                    max: 600,
+                    inRange: {
+                        colorLightness: [0, 1]
+                    }
+                },
+                series: [
+                    {
+                        name: '访问来源',
+                        type: 'pie',
+                        radius: '65%',
+                        center: ['50%', '50%'],
+                        data: data,
+                        roseType: 'radius',
+                        label: {
+                            normal: {
+                                textStyle: {
+                                    color: '#333'
+                                }
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                lineStyle: {
+                                    color: 'rgba(255, 255, 255, 0.3)'
+                                },
+                                smooth: 0.2,
+                                length: 10,
+                                length2: 20
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: '#c23531',
+                                shadowBlur: 200,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        },
+
+                        animationType: 'scale',
+                        animationEasing: 'elasticOut',
+                        animationDelay: function (idx) {
+                            return Math.random() * 200;
+                        }
+                    }
+                ]
+            };
+            myChart2.setOption(option2);
+        }
+    });
+
+    window.onresize = function(){
+        myChart.resize();
+        myChart2.resize();
+    }
+</script>
+<!-- ace scripts -->
+<!-- ace scripts -->
+</body>
+</html>

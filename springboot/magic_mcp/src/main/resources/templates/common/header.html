@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
-<header th:fragment="header">
+<header th:fragment="header" style="height: 45px;">
     <script type="text/javascript">
         try{ace.settings.check('navbar' , 'fixed')}catch(e){}
     </script>
@@ -8,16 +8,16 @@
         <div class="navbar-header pull-left">
             <a href="#">
                 <small>
-                    <img src="assets/images/base/logo.png" th:src="@{/assets/images/base/logo.png}" style="height: 45px; padding: 5px 0">
+                    <img src="" style="height: 45px; padding: 5px 0">
                 </small>
             </a><!-- /.brand -->
         </div><!-- /.navbar-header -->
         <div class="navbar-header pull-right" role="navigation">
             <ul class="nav ace-nav">
-                <!--<li class="light-blue">
+                <li class="light-blue">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <i class="icon-bell-alt icon-animated-bell"></i>
-                        <span class="badge badge-important">8</span>
+                        <span class="badge badge-important" >8</span>
                     </a>
 
                     <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
@@ -27,7 +27,7 @@
                         </li>
 
                         <li>
-                            <a href="notice.html">
+                            <a href="">
                                 <div class="clearfix">
                                             <span class="pull-left">
                                                 <i class="btn btn-xs no-hover btn-pink icon-comment"></i>
@@ -38,11 +38,11 @@
                             </a>
                         </li>
                     </ul>
-                </li>-->
+                </li>
                 <li class="light-blue">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="assets/avatars/user.jpg" th:src="@{/assets/avatars/user.jpg}" alt="瘤董事长" />
-                        <span class="user-info">
+                        <img class="nav-user-photo" src="assets/avatars/user.jpg" th:src="@{/assets/avatars/user.jpg}" alt="MagicT" />
+                        <span class="user-info" style="line-height:30px;">
 							<small>Welcome,</small>
 							<span th:text="${session.admin.adminName}"></span>
 						</span>
@@ -58,7 +58,7 @@
                         </li>-->
                         <li class="divider"></li>
                         <li>
-                            <a href="#" th:href="@{/cms/logout}">
+                            <a href="#" th:href="@{/logout}">
                                 <i class="icon-off"></i>
                                 退出
                             </a>
