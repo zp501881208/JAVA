@@ -27,5 +27,9 @@ public interface BaseService<T extends Serializable> {
      */
     boolean updateByPrimaryKeySelective(T entity);
 
+    /**
+     * 查询所有，数据量大的表禁用
+     * @return
+     */
     List<T> selectAll();
 }
