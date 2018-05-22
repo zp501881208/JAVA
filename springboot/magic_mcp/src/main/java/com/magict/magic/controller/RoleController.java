@@ -76,20 +76,7 @@ public class RoleController extends BaseController{
     @RequestMapping("/assign")
     @ResponseBody
     public ResultCode assign(HttpServletRequest request, Model model,Integer roleId,String[] menuIds){
-        if(null!=menuIds && menuIds.length>0){
-            //先清除
-            roleMenuService.deleteByRoleId(roleId);
-            //再逐个新增
-            for (String menuId : menuIds) {
-                RoleMenu roleMenu = new RoleMenu();
-                roleMenu.setRoleId(roleId);
-                roleMenu.setMenuId(menuId);
-                roleMenuService.insertSelective(roleMenu);
-            }
-            return new ResultCode(StatusCode.SUCCESS);
-        }else{
-            return new ResultCode(StatusCode.ROLEMENU_NOMENU);
-        }
+        return roleService.doAssign(roleId,menuIds);
     }
 
 }

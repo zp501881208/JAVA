@@ -8,6 +8,7 @@ import com.magict.magic.entity.Admin;
 import com.magict.magic.entity.Menu;
 import com.magict.magic.service.AdminService;
 import com.magict.magic.service.MenuService;
+import com.magict.magic.service.RoleService;
 import com.magict.magic.service.WxUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +37,8 @@ public class Test_mcp {
     AdminService adminService;
     @Autowired
     MenuService menuService;
+    @Autowired
+    RoleService roleService;
 
     @Test
     public void testA(){
@@ -71,4 +74,10 @@ public class Test_mcp {
         });
     }
 
+
+    @Test
+    public void testTransactional(){
+        String[] menuIds = {"index","menu_list","system"};
+        roleService.doAssign(1,menuIds);
+    }
 }
