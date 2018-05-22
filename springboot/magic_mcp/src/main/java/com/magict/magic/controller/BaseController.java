@@ -1,5 +1,7 @@
 package com.magict.magic.controller;
 
+import com.magict.magic.constants.Constants;
+import com.magict.magic.entity.Admin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,5 +24,8 @@ public class BaseController {
 		return String.format("http://%s%s",request.getServerName(),request.getContextPath());
 	}
 
+	public Admin getAdminSession(HttpServletRequest request){
+		return (Admin) request.getSession().getAttribute(Constants.SESSION_ADMIN);
+	}
 
 }

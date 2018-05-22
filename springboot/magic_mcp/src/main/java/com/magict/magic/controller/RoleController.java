@@ -1,11 +1,19 @@
 package com.magict.magic.controller;
 
+import com.magict.magic.entity.Admin;
+import com.magict.magic.entity.Menu;
 import com.magict.magic.entity.Role;
+import com.magict.magic.entity.RoleMenu;
+import com.magict.magic.entity.vo.ResultCode;
+import com.magict.magic.enums.StatusCode;
+import com.magict.magic.service.MenuService;
+import com.magict.magic.service.RoleMenuService;
 import com.magict.magic.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -21,8 +29,10 @@ import java.util.List;
 public class RoleController extends BaseController{
     @Autowired
     RoleService roleService;
-
-
+    @Autowired
+    MenuService menuService;
+    @Autowired
+    RoleMenuService roleMenuService;
     /**
      * 角色列表
      * @param request
@@ -45,7 +55,13 @@ public class RoleController extends BaseController{
      */
     @RequestMapping("/assignpage")
     public String assignPage(HttpServletRequest request, Model model,Integer roleId){
-
+        Admin admin = getAdminSession(request);
+        //已分配
+        List<Menu> menuList = menuService.findAdminMenu(admin.getAdminId());
+        //未分配
+        List<Menu> menuList1 = menuService.findAdminNoMenu(admin.getAdminId());
+        model.addAttribute("menuList",menuList);
+        model.addAttribute("menuList1",menuList1);
         return "role_assign";
     }
 
@@ -58,9 +74,19 @@ public class RoleController extends BaseController{
      * @return
      */
     @RequestMapping("/assign")
-    public String assign(HttpServletRequest request, Model model,Integer roleId,String[] menuIds){
-
-        return "role_assign";
+    @ResponseBody
+    public ResultCode assign(HttpServletRequest request, Model model,Integer roleId,String[] menuIds){
+        if(null!=menuIds && menuIds.length>0){
+            for (String menuId : menuIds) {
+                RoleMenu roleMenu = new RoleMenu();
+                roleMenu.setRoleId(roleId);
+                roleMenu.setMenuId(menuId);
+                roleMenuService.insertSelective(roleMenu);
+            }
+            return new ResultCode(StatusCode.SUCCESS);
+        }else{
+            return new ResultCode(StatusCode.ROLEMENU_NOMENU);
+        }
     }
 
 }
