@@ -24,6 +24,11 @@ public class BaseController {
 		return String.format("http://%s%s",request.getServerName(),request.getContextPath());
 	}
 
+	/**
+	 * 获取session中admin用户
+	 * @param request
+	 * @return
+	 */
 	public Admin getAdminSession(HttpServletRequest request){
 		return (Admin) request.getSession().getAttribute(Constants.SESSION_ADMIN);
 	}

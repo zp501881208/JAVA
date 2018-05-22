@@ -17,4 +17,11 @@ public interface RoleMenuService extends BaseService<RoleMenu> {
      * @return
      */
     List<RoleMenu> findByRoleId(Integer roleId);
+
+    /**
+     * 按角色Id删除
+     * @param roleId
+     * @return
+     */
+    int deleteByRoleId(Integer roleId);
 }

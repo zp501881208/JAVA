@@ -77,6 +77,9 @@ public class RoleController extends BaseController{
     @ResponseBody
     public ResultCode assign(HttpServletRequest request, Model model,Integer roleId,String[] menuIds){
         if(null!=menuIds && menuIds.length>0){
+            //先清除
+            roleMenuService.deleteByRoleId(roleId);
+            //再逐个新增
             for (String menuId : menuIds) {
                 RoleMenu roleMenu = new RoleMenu();
                 roleMenu.setRoleId(roleId);

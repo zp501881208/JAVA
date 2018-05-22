@@ -25,4 +25,11 @@ public class RoleMenuServiceImpl extends BaseServiceImpl<RoleMenu> implements Ro
         roleMenu.setRoleId(roleId);
         return roleMenuMapper.select(roleMenu);
     }
+
+    @Override
+    public int deleteByRoleId(Integer roleId) {
+        RoleMenu roleMenu = new RoleMenu();
+        roleMenu.setRoleId(roleId);
+        return roleMenuMapper.delete(roleMenu);
+    }
 }
