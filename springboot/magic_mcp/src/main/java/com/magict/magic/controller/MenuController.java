@@ -1,5 +1,8 @@
 package com.magict.magic.controller;
+import com.github.pagehelper.PageInfo;
 import com.magict.magic.entity.Menu;
+import com.magict.magic.entity.dto.MenuDto;
+import com.magict.magic.entity.dto.Page;
 import com.magict.magic.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,8 +38,8 @@ public class MenuController extends BaseController{
      * @return
      */
     @RequestMapping("/list")
-    public String list(HttpServletRequest request, Model model){
-        List<Menu> menuList = menuService.selectAll();
+    public String list(HttpServletRequest request, Model model, MenuDto condition, Page page){
+        PageInfo<Menu> menuList = menuService.findList(condition,page);
         model.addAttribute("menuList",menuList);
         return "menu_list";
     }

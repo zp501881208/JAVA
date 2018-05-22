@@ -12,16 +12,12 @@ public class Page {
 	/**
 	 * 每页大小
 	 */
-	public static Integer PAGE_SIZE = 10;
-	
+	private Integer pageSize = 20;
+
 	/**
 	 * 当前页数
 	 */
 	private Integer currentPage;
-	/**
-	 * 总页数
-	 */
-	private Integer totalPage;
 
 	public Integer getCurrentPage() {
 		return this.currentPage == null ? 1 : this.currentPage;
@@ -31,12 +27,11 @@ public class Page {
 		this.currentPage = currentPage;
 	}
 
-	public Integer getTotalPage() {
-		return totalPage;
+	public Integer getPageSize() {
+		return pageSize;
 	}
 
-	public void setTotalPage(Integer totalPage) {
-		this.totalPage = totalPage;
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
 	}
-	
 }

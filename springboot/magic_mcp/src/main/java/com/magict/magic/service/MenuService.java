@@ -1,6 +1,9 @@
 package com.magict.magic.service;
 
+import com.github.pagehelper.PageInfo;
 import com.magict.magic.entity.Menu;
+import com.magict.magic.entity.dto.MenuDto;
+import com.magict.magic.entity.dto.Page;
 
 import java.util.List;
 
@@ -32,4 +35,12 @@ public interface MenuService extends BaseService<Menu> {
      */
     List<Menu> findAdminNoMenu(Integer adminId);
 
+
+    /**
+     * 分页查询
+     * @param condition
+     * @param page
+     * @return
+     */
+    PageInfo<Menu> findList(MenuDto condition, Page page);
 }

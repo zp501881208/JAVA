@@ -1,6 +1,10 @@
 package com.magict.magic.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.magict.magic.entity.Menu;
+import com.magict.magic.entity.dto.MenuDto;
+import com.magict.magic.entity.dto.Page;
 import com.magict.magic.enums.BooleanEnum;
 import com.magict.magic.mapper.MenuMapper;
 import com.magict.magic.service.MenuService;
@@ -32,5 +36,15 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
     @Override
     public List<Menu> findAdminNoMenu(Integer adminId) {
         return menuMapper.selectAdminNoMenu(adminId,null);
+    }
+
+    @Override
+    public PageInfo<Menu> findList(MenuDto condition, Page page) {
+        if(page==null){
+            page = new Page();
+        }
+        PageHelper.startPage(page.getCurrentPage(),page.getPageSize());
+        List<Menu> menuList = menuMapper.selectAll();
+        return new PageInfo<Menu>(menuList);
     }
 }
