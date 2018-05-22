@@ -1,5 +1,6 @@
 package com.magict.magic.controller;
 
+import com.magict.magic.entity.Role;
 import com.magict.magic.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * 
@@ -20,6 +22,7 @@ public class RoleController extends BaseController{
     @Autowired
     RoleService roleService;
 
+
     /**
      * 角色列表
      * @param request
@@ -28,7 +31,8 @@ public class RoleController extends BaseController{
      */
     @RequestMapping("/list")
     public String list(HttpServletRequest request, Model model){
-
+        List<Role> roleList = roleService.selectAll();
+        model.addAttribute("roleList",roleList);
         return "role_list";
     }
 

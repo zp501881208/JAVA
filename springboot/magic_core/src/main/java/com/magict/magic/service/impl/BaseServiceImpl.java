@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Mapper使用范例
@@ -43,6 +44,11 @@ public class BaseServiceImpl<T extends Serializable> implements BaseService<T> {
     @Override
     public boolean updateByPrimaryKeySelective(T entity) {
         return false;
+    }
+
+    @Override
+    public List<T> selectAll() {
+        return mapper.selectAll();
     }
 
 }

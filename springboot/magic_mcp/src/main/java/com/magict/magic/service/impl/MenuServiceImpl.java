@@ -1,6 +1,7 @@
 package com.magict.magic.service.impl;
 
 import com.magict.magic.entity.Menu;
+import com.magict.magic.enums.BooleanEnum;
 import com.magict.magic.mapper.MenuMapper;
 import com.magict.magic.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,18 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu> implements MenuServic
     @Autowired
     private MenuMapper menuMapper;
 
-
     @Override
     public List<Menu> findAdminMenu(Integer adminId) {
-        return menuMapper.selectAdminMenu(adminId);
+        return menuMapper.selectAdminMenu(adminId,null);
+    }
+
+    @Override
+    public List<Menu> findAdminMenuActive(Integer adminId) {
+        return menuMapper.selectAdminMenu(adminId,BooleanEnum.YES.getKey());
+    }
+
+    @Override
+    public List<Menu> findAdminNoMenu(Integer adminId) {
+        return menuMapper.selectAdminNoMenu(adminId,null);
     }
 }

@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 菜单表
  * 工具生成不可修改
  * @author zp
- * @date 2018-05-17 10:05:45
+ * @date 2018-05-22 10:03:05
  */
 @Table(name = "`menu`")
 public class Menu extends BaseEntity implements Serializable {
@@ -21,7 +21,7 @@ public class Menu extends BaseEntity implements Serializable {
     private String menuId;
 
     /**
-     * 菜单深度
+     * 菜单深度，一级菜单非功能菜单，二级菜单为某功能菜单，三级菜单为具体功能的操作
      */
     @Column(name = "menu_deep")
     private Integer menuDeep;
@@ -60,13 +60,13 @@ public class Menu extends BaseEntity implements Serializable {
      * 是否为可执行菜单
      */
     @Column(name = "is_run_menu")
-    private String isRunMenu;
+    private Integer isRunMenu;
 
     /**
      * 是否可使用1-正常 0-关闭
      */
     @Column(name = "is_enable")
-    private String isEnable;
+    private Integer isEnable;
 
     /**
      * 说明
@@ -132,20 +132,20 @@ public class Menu extends BaseEntity implements Serializable {
         this.orderNum = orderNum == null ? null : orderNum.trim();
     }
 
-    public String getIsRunMenu() {
+    public Integer getIsRunMenu() {
         return isRunMenu;
     }
 
-    public void setIsRunMenu(String isRunMenu) {
-        this.isRunMenu = isRunMenu == null ? null : isRunMenu.trim();
+    public void setIsRunMenu(Integer isRunMenu) {
+        this.isRunMenu = isRunMenu;
     }
 
-    public String getIsEnable() {
+    public Integer getIsEnable() {
         return isEnable;
     }
 
-    public void setIsEnable(String isEnable) {
-        this.isEnable = isEnable == null ? null : isEnable.trim();
+    public void setIsEnable(Integer isEnable) {
+        this.isEnable = isEnable;
     }
 
     public String getMenuDesc() {

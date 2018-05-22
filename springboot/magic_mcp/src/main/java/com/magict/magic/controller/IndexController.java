@@ -32,14 +32,7 @@ public class IndexController extends BaseController {
 
     @RequestMapping("/homepage")
     public String pub(HttpServletRequest request, Model model){
-        WebApplicationContext wc = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getSession().getServletContext());
-        RequestMappingHandlerMapping rmhp = wc.getBean(RequestMappingHandlerMapping.class);
-        Map<RequestMappingInfo, HandlerMethod> map = rmhp.getHandlerMethods();
-        for(RequestMappingInfo info : map.keySet()){
-          logger.info("============="+info.getPatternsCondition().toString()
-                    + ","
-                    +map.get(info).getBean().toString());
-        }
+
 
         return "homepage";
     }

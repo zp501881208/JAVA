@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
-<script type="text/javascript">
-    var pathName = document.location.pathname;
-    var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
 
-//    $('a').each(function(){
-//        var href = $(this).attr('href');
-//        $(this).attr('href',projectName+href);
-//    });
-</script>
 
     <!--<a class="menu-toggler" id="menu-toggler" href="#">
         <span class="menu-text"></span>
@@ -47,29 +39,23 @@
         </div><!-- #sidebar-shortcuts -->
 
         <ul class="nav nav-list" th:each="menu:${session.menuTop}">
-           <!-- <li>
-                <a href="index" >
-                    <i class="icon-dashboard"></i>
-                    <span class="menu-text"> 首页 </span>
-                </a>
-            </li>-->
-            <!-- 菜单列表（有权访问） -->
+
             <li>
                 <a th:href="${menu.functionUrl}">
                     <i th:class="${menu.functionIcon}"></i>
                     <span class="menu-text" th:text="${menu.functionName}"></span>
                 </a>
+                <ul th:each="childMenu:${session.menuTree[menu.orderNum]}" >
+                    <li>
+                        <a th:href="${childMenu.functionUrl}">
+                            <i th:class="${childMenu.functionIcon}"></i>
+                            <span class="menu-text" th:text="${childMenu.functionName}"></span>
+                        </a>
+                    </li>
+
+                </ul>
             </li>
 
-            <ul th:each="childMenu:${session.menuTree[menu.orderNum]}">
-                <li>
-                    <a th:href="${childMenu.functionUrl}">
-                        <i th:class="${childMenu.functionIcon}"></i>
-                        <span class="menu-text" th:text="${childMenu.functionName}"></span>
-                    </a>
-                </li>
-
-            </ul>
 
         </ul><!-- /.nav-list -->
 
@@ -79,6 +65,16 @@
         <script type="text/javascript">
 
             try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+        </script>
+
+        <script type="text/javascript">
+            var pathName = document.location.pathname;
+            var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+
+            $('a').each(function(){
+                var href = $(this).attr('href');
+                $(this).attr('href',projectName+href);
+            });
         </script>
     </div>
 </html>

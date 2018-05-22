@@ -55,9 +55,20 @@ public class Test_mcp {
 
     @Test
     public void getAllUrl(){
+        List<Menu> menuList = menuService.findAdminMenuActive(1);
+        menuList.forEach(menu -> {
+            logger.info("=====menuId:{}",menu.getMenuId());
+        });
 
+        List<Menu> menuList1 = menuService.findAdminMenu(1);
+        menuList1.forEach(menu -> {
+            logger.info("=====menuId:{}",menu.getMenuId());
+        });
 
-
+        List<Menu> menuList2 = menuService.findAdminNoMenu(1);
+        menuList2.forEach(menu -> {
+            logger.info("=====menuId:{}",menu.getMenuId());
+        });
     }
 
 }

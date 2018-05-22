@@ -55,17 +55,17 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
      * @param admin
      */
     public void getMenu(HttpServletRequest request,Admin admin){
-        List<Menu> menuList = menuService.findAdminMenu(admin.getAdminId());
+        List<Menu> menuList = menuService.findAdminMenuActive(admin.getAdminId());
         List<Menu> topMenu = new ArrayList<Menu>();
         TreeMap<String, List<Menu>> treeMap = new TreeMap<String, List<Menu>>();
         menuList.forEach(menu -> {
             //一级菜单
-            if(1==menu.getMenuDeep() && "1".equals(menu.getIsEnable())){
+            if(1==menu.getMenuDeep() && BooleanEnum.YES.getKey().equals(menu.getIsEnable())){
                 topMenu.add(menu);
                 List<Menu> childrenMenu = new ArrayList<Menu>();
                 menuList.forEach(menu1 -> {
                     //获取二级菜单
-                    if (menu1.getMenuDeep()==2 && menu.getMenuId().equals(menu1.getParentId()) && "1".equals(menu1.getIsEnable())){
+                    if (menu1.getMenuDeep()==2 && menu.getMenuId().equals(menu1.getParentId()) && BooleanEnum.YES.getKey().equals(menu1.getIsEnable())){
                         childrenMenu.add(menu1);
                     }
                 });

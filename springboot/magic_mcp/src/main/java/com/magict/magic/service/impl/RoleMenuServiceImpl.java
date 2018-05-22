@@ -6,6 +6,8 @@ import com.magict.magic.service.RoleMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
 * 角色权限表实现
 * @author zp
@@ -17,4 +19,10 @@ public class RoleMenuServiceImpl extends BaseServiceImpl<RoleMenu> implements Ro
     private RoleMenuMapper roleMenuMapper;
 
 
+    @Override
+    public List<RoleMenu> findByRoleId(Integer roleId) {
+        RoleMenu roleMenu = new RoleMenu();
+        roleMenu.setRoleId(roleId);
+        return roleMenuMapper.select(roleMenu);
+    }
 }

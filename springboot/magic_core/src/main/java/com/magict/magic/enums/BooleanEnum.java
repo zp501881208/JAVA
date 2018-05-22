@@ -28,10 +28,10 @@ public enum BooleanEnum implements BaseEnum{
 
     @Override
     public Integer getKey() {
-        return null;
+        return key;
     }
     @Override
     public String getDesc() {
-        return null;
+        return desc;
     }
 }

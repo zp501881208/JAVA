@@ -3,6 +3,7 @@ package com.magict.magic.service;
 import com.magict.magic.entity.BaseEntity;
 
 import java.io.Serializable;
+import java.util.List;
 
 public interface BaseService<T extends Serializable> {
     /**
@@ -25,4 +26,6 @@ public interface BaseService<T extends Serializable> {
      * @return
      */
     boolean updateByPrimaryKeySelective(T entity);
+
+    List<T> selectAll();
 }
