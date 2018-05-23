@@ -2,8 +2,8 @@ package com.magict.magic.service;
 
 import com.github.pagehelper.PageInfo;
 import com.magict.magic.entity.Menu;
-import com.magict.magic.entity.dto.MenuDto;
 import com.magict.magic.entity.dto.Page;
+import com.magict.magic.entity.dto.MenuDto;
 
 import java.util.List;
 

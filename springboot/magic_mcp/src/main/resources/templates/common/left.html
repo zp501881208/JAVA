@@ -41,13 +41,13 @@
         <ul class="nav nav-list" th:each="menu:${session.menuTop}">
 
             <li>
-                <a th:href="${menu.functionUrl}">
+                <a th:href="@{${menu.functionUrl}}">
                     <i th:class="${menu.functionIcon}"></i>
                     <span class="menu-text" th:text="${menu.functionName}"></span>
                 </a>
                 <ul th:each="childMenu:${session.menuTree[menu.orderNum]}" >
                     <li>
-                        <a th:href="${childMenu.functionUrl}">
+                        <a th:href="@{${childMenu.functionUrl}}">
                             <i th:class="${childMenu.functionIcon}"></i>
                             <span class="menu-text" th:text="${childMenu.functionName}"></span>
                         </a>
@@ -67,7 +67,7 @@
             try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
         </script>
 
-        <script type="text/javascript">
+        <!--<script type="text/javascript">
             var pathName = document.location.pathname;
             var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
 
@@ -75,6 +75,6 @@
                 var href = $(this).attr('href');
                 $(this).attr('href',projectName+href);
             });
-        </script>
+        </script>-->
     </div>
 </html>

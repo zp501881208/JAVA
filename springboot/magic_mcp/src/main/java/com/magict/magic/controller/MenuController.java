@@ -1,8 +1,8 @@
 package com.magict.magic.controller;
 import com.github.pagehelper.PageInfo;
 import com.magict.magic.entity.Menu;
-import com.magict.magic.entity.dto.MenuDto;
 import com.magict.magic.entity.dto.Page;
+import com.magict.magic.entity.dto.MenuDto;
 import com.magict.magic.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.Map;
 
 /**
