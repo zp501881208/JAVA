@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
-
-
     <!--<a class="menu-toggler" id="menu-toggler" href="#">
         <span class="menu-text"></span>
     </a>-->
@@ -45,7 +43,8 @@
                     <i th:class="${menu.functionIcon}"></i>
                     <span class="menu-text" th:text="${menu.functionName}"></span>
                 </a>
-                <ul th:each="childMenu:${session.menuTree[menu.orderNum]}" >
+
+                <ul th:if="null!=${session.menuTree[menu.orderNum]}"  th:each="childMenu:${session.menuTree[menu.orderNum]}" >
                     <li>
                         <a th:href="@{${childMenu.functionUrl}}">
                             <i th:class="${childMenu.functionIcon}"></i>

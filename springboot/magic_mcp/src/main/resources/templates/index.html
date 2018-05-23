@@ -6,7 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<!-- basic styles -->
-
 	<link href="assets/css/bootstrap.min.css" th:href="@{/assets/css/bootstrap.min.css}" rel="stylesheet" />
 	<link rel="stylesheet" href="assets/css/font-awesome.min.css" th:href="@{/assets/css/font-awesome.min.css}"/>
 	<!--[if IE 7]>
@@ -30,13 +29,9 @@
 	<script src="assets/js/html5shiv.js" th:src="@{/assets/js/html5shiv.js}"></script>
 	<script src="assets/js/respond.min.js" th:src="@{/assets/js/respond.min.js}"></script>
 	<![endif]-->
-
 	<!-- basic scripts -->
-
 	<script src="assets/js/jquery-2.0.3.min.js" th:src="@{/assets/js/jquery-2.0.3.min.js}"></script>
-
 	<!-- <![endif]-->
-
 	<script type="text/javascript">
         if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 	</script>
@@ -46,7 +41,6 @@
 	<!--[if lte IE 8]>
 	<script src="assets/js/excanvas.min.js" th:src="@{/assets/js/excanvas.min.js}"></script>
 	<![endif]-->
-
 	<script src="assets/js/jquery-ui-1.10.3.custom.min.js" th:src="@{/assets/js/jquery-ui-1.10.3.custom.min.js}"></script>
 	<script src="assets/js/jquery.ui.touch-punch.min.js" th:src="@{/assets/js/jquery.ui.touch-punch.min.js}"></script>
 	<script src="assets/js/jquery.slimscroll.min.js" th:src="@{/assets/js/jquery.slimscroll.min.js}"></script>
@@ -55,18 +49,17 @@
 	<script src="assets/js/flot/jquery.flot.min.js" th:src="@{/assets/js/flot/jquery.flot.min.js}"></script>
 	<script src="assets/js/flot/jquery.flot.pie.min.js" th:src="@{/assets/js/flot/jquery.flot.pie.min.js}"></script>
 	<script src="assets/js/flot/jquery.flot.resize.min.js" th:src="@{/assets/js/flot/jquery.flot.resize.min.js}"></script>
-
 	<!-- ace scripts -->
-
 	<script src="assets/js/ace-elements.min.js" th:src="@{/assets/js/ace-elements.min.js}"></script>
 	<script src="assets/js/ace.min.js" th:src="@{/assets/js/ace.min.js}"></script>
-
 	<!-- inline scripts related to this page -->
+
+	<script src="assets/js/common.js" th:src="@{/assets/js/common.js}"></script>
+	<!--<script src="assets/js/echarts.common.min.js" th:src="@{/js/echarts.common.min.js}"></script>-->
 </head>
-
 <body>
+<!-- 头部公共 -->
 <div class="navbar navbar-default" id="navbar" th:replace="common/header::header">
-
 </div>
 
 <div class="main-container" id="main-container">
@@ -75,12 +68,7 @@
 	</script>
 
 	<div class="main-container-inner">
-		<a class="menu-toggler" id="menu-toggler" href="#">
-			<span class="menu-text"></span>
-		</a>
-
-		<div class="sidebar" id="sidebar" th:replace="common/left::left">
-
+		<div class="sidebar" id="sidebar" th:replace="common/left::left"><!-- 左侧菜单 -->
 		</div>
 
 		<div class="main-content"><!-- content -->
@@ -210,8 +198,7 @@
 		<i class="icon-double-angle-up icon-only bigger-110"></i>
 	</a>
 </div><!-- /.main-container -->
-<script src="assets/js/common.js" th:src="@{/assets/js/common.js}"></script>
-<script src="assets/js/echarts.common.min.js" th:src="@{/js/echarts.common.min.js}"></script>
+
 <script type="text/javascript">
     //折线图
 //    var myChart = echarts.init(document.getElementById('chart'));
@@ -358,10 +345,10 @@
 //        }
 //    });
 
-    window.onresize = function(){
-        myChart.resize();
-        myChart2.resize();
-    }
+//    window.onresize = function(){
+//        myChart.resize();
+//        myChart2.resize();
+//    }
 </script>
 <!-- ace scripts -->
 <!-- ace scripts -->

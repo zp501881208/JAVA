@@ -17,14 +17,14 @@ public class Page {
 	/**
 	 * 当前页数
 	 */
-	private Integer currentPage;
+	private Integer pageNum;
 
-	public Integer getCurrentPage() {
-		return this.currentPage == null ? 1 : this.currentPage;
+	public Integer getpageNum() {
+		return this.pageNum == null ? 1 : this.pageNum;
 	}
 
-	public void setCurrentPage(Integer currentPage) {
-		this.currentPage = currentPage;
+	public void setpageNum(Integer pageNum) {
+		this.pageNum = pageNum;
 	}
 
 	public Integer getPageSize() {

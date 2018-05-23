@@ -7,6 +7,8 @@ import com.magict.magic.enums.BaseEnum;
 import com.magict.magic.enums.BooleanEnum;
 import com.magict.magic.service.AdminService;
 import com.magict.magic.service.MenuService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,6 +33,8 @@ import java.util.*;
  */
 @Component
 public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+    protected transient final Logger logger = LoggerFactory.getLogger(getClass());
+
     @Autowired
     AdminService adminService;
     @Autowired
@@ -65,17 +69,20 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                 List<Menu> childrenMenu = new ArrayList<Menu>();
                 menuList.forEach(menu1 -> {
                     //获取二级菜单
-                    if (menu1.getMenuDeep()==2 && menu.getMenuId().equals(menu1.getParentId()) && BooleanEnum.YES.getKey().equals(menu1.getIsEnable())){
+                    if (null!= menu1.getMenuDeep() && menu1.getMenuDeep()==2
+                            && menu.getMenuId().equals(menu1.getParentId()) && BooleanEnum.YES.getKey().equals(menu1.getIsEnable())){
                         childrenMenu.add(menu1);
                     }
                 });
-                treeMap.put(menu.getOrderNum(),childrenMenu);
-
+                if(null!=childrenMenu && childrenMenu.size()>0){
+                    treeMap.put(menu.getOrderNum(),childrenMenu);
+                }
             }
         });
         request.getSession().setAttribute(Constants.SESSION_MENU_TOP,topMenu);
         request.getSession().setAttribute(Constants.SESSION_MENU_TREE,treeMap);
-
+        logger.info("topMenuSize:{}",topMenu.size());
+        logger.info("menuTreeSize：{}",treeMap.size());
     }
 
 }

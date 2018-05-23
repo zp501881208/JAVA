@@ -39,7 +39,9 @@ public class MenuController extends BaseController{
     @RequestMapping("/list")
     public String list(HttpServletRequest request, Model model, MenuDto condition, Page page){
         PageInfo<Menu> menuList = menuService.findList(condition,page);
-        model.addAttribute("menuList",menuList);
+
+        model.addAttribute("condition", condition);
+        model.addAttribute("paginator", menuList);
         return "menu_list";
     }
 

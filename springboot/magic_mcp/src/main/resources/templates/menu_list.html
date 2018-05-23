@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+	<title>菜单管理</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- basic styles -->
+
+	<link href="assets/css/bootstrap.min.css" th:href="@{/assets/css/bootstrap.min.css}" rel="stylesheet" />
+	<link rel="stylesheet" href="assets/css/font-awesome.min.css" th:href="@{/assets/css/font-awesome.min.css}"/>
+	<!--[if IE 7]>
+	<link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css"/>
+	<![endif]-->
+	<!-- page specific plugin styles -->
+	<!-- fonts -->
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+	<!-- ace styles -->
+	<link rel="stylesheet" href="assets/css/ace.min.css" th:href="@{/assets/css/ace.min.css}"/>
+	<link rel="stylesheet" href="assets/css/ace-rtl.min.css" th:href="@{/assets/css/ace-rtl.min.css}"/>
+	<link rel="stylesheet" href="assets/css/ace-skins.min.css" th:href="@{/assets/css/ace-skins.min.css}"/>
+	<!--[if lte IE 8]>
+	<link rel="stylesheet" href="assets/css/ace-ie.min.css" th:href="@{/assets/css/ace-ie.min.css}"/>
+	<![endif]-->
+	<!-- inline styles related to this page -->
+	<!-- ace settings handler -->
+	<script src="assets/js/ace-extra.min.js" th:src="@{/assets/js/ace-extra.min.js}"></script>
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="assets/js/html5shiv.js" th:src="@{/assets/js/html5shiv.js}"></script>
+	<script src="assets/js/respond.min.js" th:src="@{/assets/js/respond.min.js}"></script>
+	<![endif]-->
+
+	<!-- basic scripts -->
+
+	<script src="assets/js/jquery-2.0.3.min.js" th:src="@{/assets/js/jquery-2.0.3.min.js}"></script>
+
+	<!-- <![endif]-->
+
+	<script type="text/javascript">
+        if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+	</script>
+	<script src="assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
+	<script src="assets/js/typeahead-bs2.min.js" th:src="@{/assets/js/typeahead-bs2.min.js}"></script>
+	<!-- page specific plugin scripts -->
+	<!--[if lte IE 8]>
+	<script src="assets/js/excanvas.min.js" th:src="@{/assets/js/excanvas.min.js}"></script>
+	<![endif]-->
+
+	<script src="assets/js/jquery-ui-1.10.3.custom.min.js" th:src="@{/assets/js/jquery-ui-1.10.3.custom.min.js}"></script>
+	<script src="assets/js/jquery.ui.touch-punch.min.js" th:src="@{/assets/js/jquery.ui.touch-punch.min.js}"></script>
+	<script src="assets/js/jquery.slimscroll.min.js" th:src="@{/assets/js/jquery.slimscroll.min.js}"></script>
+	<script src="assets/js/jquery.easy-pie-chart.min.js" th:src="@{/assets/js/jquery.easy-pie-chart.min.js}"></script>
+	<script src="assets/js/jquery.sparkline.min.js" th:src="@{/assets/js/jquery.sparkline.min.js}"></script>
+	<script src="assets/js/flot/jquery.flot.min.js" th:src="@{/assets/js/flot/jquery.flot.min.js}"></script>
+	<script src="assets/js/flot/jquery.flot.pie.min.js" th:src="@{/assets/js/flot/jquery.flot.pie.min.js}"></script>
+	<script src="assets/js/flot/jquery.flot.resize.min.js" th:src="@{/assets/js/flot/jquery.flot.resize.min.js}"></script>
+
+	<!-- ace scripts -->
+
+	<script src="assets/js/ace-elements.min.js" th:src="@{/assets/js/ace-elements.min.js}"></script>
+	<script src="assets/js/ace.min.js" th:src="@{/assets/js/ace.min.js}"></script>
+
+	<!--分页-->
+	<link rel="stylesheet" th:href="@{/css/myPage.css}"/>
+	<script th:src="@{/js/myPage.js}"></script>
+	<script th:src="@{/js/jqPaginator.min.js}"></script>
+	<!-- inline scripts related to this page -->
+	<style type="text/css">
+		.btn-sm{ height: 28px !important; padding:0 9px !important; float: right !important; }
+	</style>
+</head>
+
+<body>
+<div class="navbar navbar-default" id="navbar" th:replace="common/header::header">
+</div>
+
+<div class="main-container" id="main-container">
+	<script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+	</script>
+
+	<div class="main-container-inner">
+		<div class="sidebar" id="sidebar" th:replace="common/left::left"><!-- 左侧菜单 -->
+		</div>
+
+		<div class="main-content">
+			<form method="post" th:action="@{/menu/list}" id="myForm">
+				<input type="hidden" id="count" runat="server" th:value="${paginator.total }"/>
+				<input type="hidden" id="page" name="pageNum" runat="server" th:value="${paginator.pageNum }" />
+				<input type="hidden" id="pageSize" name="pageSize" runat="server" th:value="10" />
+
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
+						try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+					</script>
+
+					<ul class="breadcrumb">
+						<li>
+							<i class="icon-home home-icon"></i>
+							<a >导出excel</a>
+						</li>
+					</ul><!-- .breadcrumb -->
+					<!-- 搜索框 -->
+					<div class="nav-search" id="nav-search">
+						<span class="input-icon">
+							<input type="text" placeholder="菜单ID" name="menuId" th:value="${condition.menuId}" class="input-small" id="menuId" autocomplete="off">
+							<i class="icon-search nav-search-icon"></i>
+						</span>
+						<span class="input-icon">
+							<input type="text" placeholder="菜单名称" name="functionName" th:value="${condition.functionName}" class="input-large" id="functionName" autocomplete="off">
+							<i class="icon-search nav-search-icon"></i>
+						</span>
+						<input type="submit" class="btn btn-info btn-sm" name="">
+					</div>
+				</div>
+
+				<div class="page-content">
+					<div class="row">
+						<div class="col-xs-12">
+							<!-- PAGE CONTENT BEGINS -->
+							<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+								<thead>
+								<tr>
+									<th class="center">菜单ID</th>
+									<th class="center">菜单深度</th>
+									<th class="center">菜单图标</th>
+									<th class="center">菜单名称</th>
+									<th class="center">菜单访问路径</th>
+									<th class="center">父类ID</th>
+									<th class="center">排序号</th>
+									<th class="center">是否为可执行菜单</th>
+									<th class="center">是否可使用</th>
+									<th class="center">说明</th>
+									<th class="center">说明</th>
+									<th class="center">说明</th>
+									<th class="center">说明</th>
+									<th class="center">说明</th>
+									<th class="center">说明</th>
+									<th class="center">说明</th>
+									<th class="center">说明</th>
+									<th class="center">说明</th>
+									<th class="center">说明</th>
+									<th class="center">说明</th>
+									<th class="center">说明</th>
+									<th class="center">说明</th>
+
+								</tr>
+								</thead>
+								<tbody>
+								<tr th:each="item:${paginator.list}">
+									<th class="center" th:text="${item.menuId}">menuId</th>
+									<th class="center" th:text="${item.menuDeep}">menuDeep</th>
+									<th class="center" th:text="${item.functionIcon}">functionIcon</th>
+									<th class="center" th:text="${item.functionName}">functionName</th>
+									<th class="center" th:text="${item.functionUrl}">functionUrl</th>
+									<th class="center" th:text="${item.parentId}">parentId</th>
+									<th class="center" th:text="${item.orderNum}">orderNum</th>
+									<th class="center" th:if="${item.isRunMenu==1}">是</th>
+									<th class="center" th:if="${item.isRunMenu==0}">否</th>
+									<th class="center" th:if="${item.isEnable==1}">是</th>
+									<th class="center" th:if="${item.isEnable==0}">否</th>
+									<th class="center" th:text="${item.menuDesc}">menuDesc</th>
+									<th class="center" th:text="${item.menuDesc}">menuDesc</th>
+									<th class="center" th:text="${item.menuDesc}">menuDesc</th>
+									<th class="center" th:text="${item.menuDesc}">menuDesc</th>
+									<th class="center" th:text="${item.menuDesc}">menuDesc</th>
+									<th class="center" th:text="${item.menuDesc}">menuDesc</th>
+									<th class="center" th:text="${item.menuDesc}">menuDesc</th>
+									<th class="center" th:text="${item.menuDesc}">menuDesc</th>
+									<th class="center" th:text="${item.menuDesc}">menuDesc</th>
+									<th class="center" th:text="${item.menuDesc}">menuDesc</th>
+									<th class="center" th:text="${item.menuDesc}">menuDesc</th>
+									<th class="center" th:text="${item.menuDesc}">menuDesc</th>
+									<th class="center" th:text="${item.menuDesc}">menuDesc</th>
+
+									<!--<th class="center" th:text="${#dates.format(item.createTime,'yyyy-MM-dd HH:mm:ss')}">2018-3-25 0:0:0</th>-->
+								</tbody>
+							</table>
+							<!--分页-->
+							<div class="text-right">
+								<ul class="pagination" id="pagination"></ul>
+							</div>
+							<!-- PAGE CONTENT ENDS -->
+						</div><!-- /.col -->
+					</div><!-- /.row -->
+				</div><!-- /.page-content -->
+			</form>
+		</div><!-- /.main-content -->
+	</div><!-- /.main-container-inner -->
+
+	<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+		<i class="icon-double-angle-up icon-only bigger-110"></i>
+	</a>
+</div><!-- /.main-container -->
+<script src="assets/js/common.js" th:src="@{/assets/js/common.js}"></script>
+<script>
+    $(function(){
+        //加载分页
+        loadpage();
+    })
+</script>
+</body>
+</html>
