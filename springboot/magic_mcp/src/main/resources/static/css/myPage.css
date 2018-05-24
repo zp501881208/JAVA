@@ -18,3 +18,16 @@
     display: inline-block;
     vertical-align: middle;
 }
+
+.nav-list>li .submenu>li.active>a
+{
+    color: #fff!important;
+}
+.nav-list li .submenu{
+    background-color: #393939!important;
+    color: #fff!important;
+}
+/*.nav-list li .submenu.active{*/
+    /*background-color: red!important;*/
+    /*color: #fff!important;*/
+/*}*/

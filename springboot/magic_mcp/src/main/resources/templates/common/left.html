@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
-    <!--<a class="menu-toggler" id="menu-toggler" href="#">
-        <span class="menu-text"></span>
-    </a>-->
+
+
+
     <div class="sidebar" id="sidebar" th:fragment="left">
         <script type="text/javascript">
             try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
@@ -10,7 +10,7 @@
         <div class="sidebar-shortcuts" id="sidebar-shortcuts">
             <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
                 <button class="btn btn-success">
-                    首页
+                    可
                 </button>
 
                 <button class="btn btn-info">
@@ -25,27 +25,23 @@
                 </button>
             </div>
 
-            <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-                <span class="btn btn-success"></span>
-
-                <span class="btn btn-info"></span>
-
-                <span class="btn btn-warning"></span>
-
-                <span class="btn btn-danger"></span>
-            </div>
         </div><!-- #sidebar-shortcuts -->
 
-        <ul class="nav nav-list" th:each="menu:${session.menuTop}">
-
-            <li>
-                <a th:href="@{${menu.functionUrl}}">
+        <ul class="nav nav-list">
+            <!--th:class="${menu.functionUrl=='system'}?'active':''"-->
+            <li th:each="menu:${session.menuTop}" th:onclick="'javascript:setCurrentMenu(this);'" th:class="parentmenu">
+                <a th:if="null!=${menu.functionUrl}" th:href="@{${menu.functionUrl}}">
+                    <i th:class="${menu.functionIcon}"></i>
+                    <span class="menu-text" th:text="${menu.functionName}"></span>
+                </a>
+                <a th:if="null==${menu.functionUrl}">
                     <i th:class="${menu.functionIcon}"></i>
                     <span class="menu-text" th:text="${menu.functionName}"></span>
                 </a>
 
-                <ul th:if="null!=${session.menuTree[menu.orderNum]}"  th:each="childMenu:${session.menuTree[menu.orderNum]}" >
-                    <li>
+                <ul class="submenu">
+                    <!--th:class="${childMenu.functionUrl=='menu_list'}?'active':''"-->
+                    <li th:if="null!=${session.menuTree[menu.orderNum]}" th:each="childMenu:${session.menuTree[menu.orderNum]}" >
                         <a th:href="@{${childMenu.functionUrl}}">
                             <i th:class="${childMenu.functionIcon}"></i>
                             <span class="menu-text" th:text="${childMenu.functionName}"></span>
@@ -54,26 +50,24 @@
 
                 </ul>
             </li>
-
-
         </ul><!-- /.nav-list -->
 
         <div class="sidebar-collapse" id="sidebar-collapse">
             <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
         </div>
         <script type="text/javascript">
-
             try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+
+
         </script>
 
-        <!--<script type="text/javascript">
-            var pathName = document.location.pathname;
-            var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+        <script type="text/css">
+            /*.submenu li.active a{*/
+            /*color: red!important;*/
+            /*}*/
+            .nav-list>li .submenu>li.active>a{color:red!important;}
+        </script>
 
-            $('a').each(function(){
-                var href = $(this).attr('href');
-                $(this).attr('href',projectName+href);
-            });
-        </script>-->
+
     </div>
 </html>
